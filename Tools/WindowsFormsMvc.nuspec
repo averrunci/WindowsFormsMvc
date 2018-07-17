@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WindowsFormsMvc</id>
+    <version>1.0.0</version>
+    <title>Windows Forms MVC</title>
+    <authors>averrunci</authors>
+    <owners>averrunci</owners>
+    <projectUrl>https://github.com/averrunci/WindowsFormsMvc</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The class library for Windows Forms with Model View Controller</description>
+    <language>en-US</language>
+    <copyright>Copyright (C) 2018 Fievus</copyright>
+    <tags>wpf mvc</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="net46"/>
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="net46"/>
+      <frameworkAssembly assemblyName="System.Drawing" targetFramework="net46"/>
+      <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework="net46"/>
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Charites" version="1.0.0"/>
+      <dependency id="Charites.Bindings" version="1.0.0"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\LICENSE"/>
+    <file src="..\Binary\Release\WindowsFormsMvc.dll" target="lib\net46"/>
+    <file src="..\Binary\Release\WindowsFormsMvc.XML" target="lib\net46"/>
+  </files>
+</package>
