@@ -82,6 +82,15 @@ namespace Charites.Windows.Mvc
             public Action ClickAssertionHandler { get; set; }
         }
 
+        public class ExceptionTestWindowsFormsController
+        {
+            [EventHandler(Event = nameof(Control.Click))]
+            private void Control_Click()
+            {
+                throw new Exception();
+            }
+        }
+
         [View(Key = "AttachingTestDataContext")]
         public class TestDataContextController : TestWindowsFormsControllerBase { }
 

@@ -37,6 +37,8 @@ namespace Charites.Windows.Mvc
             ));
         }
 
+        protected override EventHandlerAction CreateEventHandlerAction(MethodInfo method, object target) => new WindowsFormsEventHandlerAction(method, target);
+
         private EventInfo RetrieveEventInfo(Control element, string name)
             => element?.GetType().GetEvents().FirstOrDefault(e => e.Name == name);
     }

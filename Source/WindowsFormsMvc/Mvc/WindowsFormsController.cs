@@ -18,6 +18,11 @@ namespace Charites.Windows.Mvc
     public class WindowsFormsController : Component
     {
         /// <summary>
+        /// Occurs when an exception is not handled in event handlers.
+        /// </summary>
+        public static event UnhandledExceptionEventHandler UnhandledException;
+
+        /// <summary>
         /// Gets or sets the default finder to find a data context defined in a view.
         /// </summary>
         public static IWindowsFormsDataContextFinder DefaultDataContextFinder
@@ -324,5 +329,14 @@ namespace Charites.Windows.Mvc
 
             Controllers.ForEach(controller => EventHandlersOf(controller).GetBy(null).From(view).With(e).Raise("DataContextChanged"));
         }
+
+        internal static bool HandleUnhandledException(Exception exc)
+        {
+            var e = new UnhandledExceptionEventArgs(exc);
+            OnUnhandledException(e);
+            return e.Handled;
+        }
+
+        private static void OnUnhandledException(UnhandledExceptionEventArgs e) => UnhandledException?.Invoke(null, e);
     }
 }

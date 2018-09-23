@@ -36,11 +36,11 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Charites, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Charites.1.0.0\lib\netstandard2.0\Charites.dll</HintPath>
+    <Reference Include="Charites, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Charites.1.1.0\lib\netstandard2.0\Charites.dll</HintPath>
     </Reference>
-    <Reference Include="Charites.Bindings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Charites.Bindings.1.0.0\lib\netstandard2.0\Charites.Bindings.dll</HintPath>
+    <Reference Include="Charites.Bindings, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Charites.Bindings.1.1.0\lib\netstandard2.0\Charites.Bindings.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
@@ -101,6 +101,7 @@
     <Compile Include="Mvc\WindowsFormsControllerSpec_AttachingAndDetachingController.cs" />
     <Compile Include="Mvc\WindowsFormsControllerSpec_DataContextChanged.cs" />
     <Compile Include="Mvc\WindowsFormsControllerSpec_EventHandlerDataContextControlInjection.cs" />
+    <Compile Include="Mvc\WindowsFormsControllerSpec_UnhandledException.cs" />
     <Compile Include="Mvc\WindowsFormsControllerSpec_WindowsFormsControllerExtension.cs" />
     <Compile Include="Mvc\TestDataContexts.cs" />
     <Compile Include="Mvc\TestControls.cs" />

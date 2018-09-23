@@ -20,5 +20,8 @@ namespace Charites.Windows.Mvc
 
         [Context]
         WindowsFormsControllerSpec_WindowsFormsControllerExtension WindowsFormsControllerExtension { get; }
+
+        [Context]
+        WindowsFormsControllerSpec_UnhandledException UnhandledException { get; }
     }
 }
