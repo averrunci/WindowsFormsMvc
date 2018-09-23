@@ -28,7 +28,7 @@ namespace Charites.Windows.Samples.SimpleLoginDemo
 
         private static void HandledUnhandledException(Exception exception) => MessageBox.Show(exception.ToString());
 
-        private static void OnAppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void OnAppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
             => HandledUnhandledException(e.ExceptionObject as Exception);
 
         private static void OnApplicationThreadException(object sender, ThreadExceptionEventArgs e)
