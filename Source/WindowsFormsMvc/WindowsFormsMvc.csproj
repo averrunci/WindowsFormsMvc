@@ -48,11 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Forms\BoundPropertyBinding.cs" />
     <Compile Include="Forms\CheckedListBoxItemsSource.cs" />
     <Compile Include="Forms\CheckStateExtensions.cs" />
     <Compile Include="Forms\ContentControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\IBindablePropertyBinding.cs" />
     <Compile Include="Forms\IObservablePropertyBinding.cs" />
     <Compile Include="Forms\ItemsSource.cs" />
     <Compile Include="Forms\ListBoxItemsSource.cs" />
