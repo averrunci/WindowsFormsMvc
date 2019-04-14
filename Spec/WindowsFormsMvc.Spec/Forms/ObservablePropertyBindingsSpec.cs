@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -24,6 +24,9 @@ namespace Charites.Windows.Forms
         const int ChangedText = 99;
         ObservableProperty<int> TextProperty { get; } = InitialText.ToObservableProperty();
 
+        BoundProperty<string>  NameBoundProperty { get; }
+        BoundProperty<int> TextBoundProperty { get; }
+
         const string ControlInitialName = "Control Name";
         const string ControlInitialText = "0";
         TestControls.TestControl TestControl { get; } = new TestControls.TestControl
@@ -31,6 +34,12 @@ namespace Charites.Windows.Forms
             Name = ControlInitialName,
             Text = ControlInitialText
         };
+
+        public ObservablePropertyBindingsSpec()
+        {
+            NameBoundProperty = new BoundProperty<string>().Bind(NameProperty);
+            TextBoundProperty = new BoundProperty<int>().Bind(TextProperty);
+        }
 
         void SetControlPropertyValue(object value, Control control, string propertyName)
             => TypeDescriptor.GetProperties(control).OfType<PropertyDescriptor>().FirstOrDefault(p => p.Name == propertyName)?.SetValue(control, value);
@@ -107,6 +116,28 @@ namespace Charites.Windows.Forms
 
             When("the value of the text property of the control is changed", () => SetControlPropertyValue(InitialText.ToString(), TestControl, nameof(TestControl.Text)));
             Then("the value of the observable property for the text should not be changed", () => TextProperty.Value == ChangedText);
+        }
+
+        [Example("Binds the bound property to the property of the control")]
+        void Ex04()
+        {
+            When("to bind the bound property to the name property of the control", () => ObservablePropertyBindings.Bind(NameBoundProperty, TestControl, nameof(TestControl.Name)));
+            Then("the value of the name property of the control should be the value of the observable property", () => TestControl.Name == NameProperty.Value);
+            When("the value of the observable property is changed", () => NameProperty.Value = ChangedName);
+            Then("the value of the name property of the control should be the changed value", () => TestControl.Name == ChangedName);
+
+            When("to bind the observable property to the text property of the control with the converter", () => ObservablePropertyBindings.Bind(TextBoundProperty, TestControl, nameof(TestControl.Text), text => text.ToString()));
+            Then("the value of the text property of the control should be the value of the observable property", () => TestControl.Text == TextProperty.Value.ToString());
+            When("the value of the observable property is changed", () => TextProperty.Value = ChangedText);
+            Then("the value of the text property of the control should be the changed value.", () => TestControl.Text == ChangedText.ToString());
+
+            When("to unbind bindings", () => ObservablePropertyBindings.Unbind());
+
+            When("the value of the observable property for the name is changed", () => NameProperty.Value = InitialName);
+            Then("the value of the name property of the control should not be changed", () => TestControl.Name == ChangedName);
+
+            When("the value of the observable property for the text is changed", () => TextProperty.Value = InitialText);
+            Then("the value of the text property of the control should not be changed", () => TestControl.Text == ChangedText.ToString());
         }
     }
 }
