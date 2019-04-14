@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -121,6 +121,21 @@ namespace Charites.Windows.Mvc
                 {
                     Description = "When the contents are attributed to methods and the event handler has two arguments.",
                     Controller = new TestWindowsFormsControllers.AttributedToMethod.EventHandlerController(AssertionEventHandler)
+                };
+                yield return new
+                {
+                    Description = "When the contents are attributed to methods using a naming convention and the event handler has no argument.",
+                    Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.NoArgumentHandlerController(NoArgumentAssertionHandler)
+                };
+                yield return new
+                {
+                    Description = "When the contents are attributed to methods using a naming convention and the event handler has one argument.",
+                    Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.OneArgumentHandlerController(OneArgumentAssertionHandler)
+                };
+                yield return new
+                {
+                    Description = "When the contents are attributed to methods using a naming convention and the event handler has two arguments.",
+                    Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.EventHandlerController(AssertionEventHandler)
                 };
             }
         }

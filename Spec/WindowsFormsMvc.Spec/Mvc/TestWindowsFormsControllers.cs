@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -263,6 +263,56 @@ namespace Charites.Windows.Mvc
             {
                 [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
                 public void ChildControl_Click(object sender, EventArgs e) => handler(sender, e);
+                private readonly EventHandler handler;
+
+                public EventHandlerController(EventHandler assertionHandler)
+                {
+                    handler = assertionHandler;
+                }
+            }
+        }
+
+        public class AttributedToMethodUsingNamingConvention
+        {
+            public class Controller : ITestWindowsFormsController
+            {
+                protected void SetDataContext(object dataContext) => DataContext = dataContext;
+                public object DataContext { get; private set; }
+
+                [Element(Name = "control")]
+                protected void SetControl(Control control) => Control = control;
+                public Control Control { get; private set; }
+
+                [Element(Name = "childControl")]
+                protected void SetChildControl(Control childControl) => ChildControl = childControl;
+                public Control ChildControl { get; private set; }
+            }
+
+            public class NoArgumentHandlerController : Controller
+            {
+                public void childControl_Click() => handler();
+                private readonly Action handler;
+
+                public NoArgumentHandlerController(Action assertionHandler)
+                {
+                    handler = assertionHandler;
+                }
+            }
+
+            public class OneArgumentHandlerController : Controller
+            {
+                public void childControl_Click(EventArgs e) => handler(e);
+                private readonly Action<EventArgs> handler;
+
+                public OneArgumentHandlerController(Action<EventArgs> assertionHandler)
+                {
+                    handler = assertionHandler;
+                }
+            }
+
+            public class EventHandlerController : Controller
+            {
+                public void childControl_Click(object sender, EventArgs e) => handler(sender, e);
                 private readonly EventHandler handler;
 
                 public EventHandlerController(EventHandler assertionHandler)
