@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -116,17 +116,17 @@ namespace Charites.Windows.Mvc
             var loadEventHandler = Substitute.For<Action>();
             var clickEventHandler = Substitute.For<Action>();
 
-            Given("a view that contains the data context", () => View = new TestControls.TestControl { Name = "Control", DataContext = new TestDataContexts.TestDataContext() });
+            Given("a view that contains the data context", () => View = new TestControls.TestControl { Name = "Control", DataContext = new TestDataContexts.TestDisposableDataContext() });
             When("the view is set to the WindowsFormsController", () =>
             {
                 WindowsFormsController.View = View;
-                WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().LoadAssertionHandler = loadEventHandler;
-                WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().ClickAssertionHandler = clickEventHandler;
+                WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().LoadAssertionHandler = loadEventHandler;
+                WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().ClickAssertionHandler = clickEventHandler;
             });
-            Then("the dat context of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().DataContext == View.DataContext);
+            Then("the dat context of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().DataContext == View.DataContext);
 
             When("the handle of the view is created", () => View.RaiseHandleCreated());
-            Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().Control == View);
+            Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == View);
             When("the Load event is raised", () => View.RaiseLoad());
             Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
             When("the Click event is raised", () => View.RaiseClick());
@@ -135,8 +135,9 @@ namespace Charites.Windows.Mvc
             loadEventHandler.ClearReceivedCalls();
             clickEventHandler.ClearReceivedCalls();
             When("the view is disposed", () => View.Dispose());
-            Then("the data context of the controller should be null", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().DataContext == null);
-            Then("the control of the controller should be null", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().Control == null);
+            Then("the data context of the controller should be null", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().DataContext == null);
+            Then("the control of the controller should be null", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == null);
+            Then("the controller should be disposed", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().IsDisposed);
             When("the Load event is raised", () => View.RaiseLoad());
             Then("the Load event should not be handled", () => loadEventHandler.DidNotReceive().Invoke());
             When("the Click event is raised", () => View.RaiseClick());
@@ -148,20 +149,20 @@ namespace Charites.Windows.Mvc
         {
             var loadEventHandler = Substitute.For<Action>();
             var clickEventHandler = Substitute.For<Action>();
-            var controller = (TestWindowsFormsControllers.TestWindowsFormsController)null;
+            var controller = (TestWindowsFormsControllers.TestDisposableWindowsFormsController)null;
 
-            Given("a view that contains the data context", () => View = new TestControls.TestControl { Name = "Control", DataContext = new TestDataContexts.TestDataContext() });
+            Given("a view that contains the data context", () => View = new TestControls.TestControl { Name = "Control", DataContext = new TestDataContexts.TestDisposableDataContext() });
             When("the view is set to the WindowsFormsController", () =>
             {
                 WindowsFormsController.View = View;
-                controller = WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>();
+                controller = WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>();
                 controller.LoadAssertionHandler = loadEventHandler;
                 controller.ClickAssertionHandler = clickEventHandler;
             });
-            Then("the dat context of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().DataContext == View.DataContext);
+            Then("the dat context of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().DataContext == View.DataContext);
 
             When("the handle of the view is created", () => View.RaiseHandleCreated());
-            Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>().Control == View);
+            Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == View);
             When("the Load event is raised", () => View.RaiseLoad());
             Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
             When("the Click event is raised", () => View.RaiseClick());
@@ -173,6 +174,7 @@ namespace Charites.Windows.Mvc
             Then("the controller should be detached", () => !WindowsFormsController.GetControllers().Any());
             Then("the data context of the controller should be null", () => controller.DataContext == null);
             Then("the control of the controller should be null", () => controller.Control == null);
+            Then("the controller should be disposed", () => controller.IsDisposed);
             When("the Load event is raised", () => View.RaiseLoad());
             Then("the Load event should not be handled", () => loadEventHandler.DidNotReceive().Invoke());
             When("the Click event is raised", () => View.RaiseClick());
@@ -246,6 +248,43 @@ namespace Charites.Windows.Mvc
                     .RaiseAsync("Load")
             );
             Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+        }
+
+        [Example("Removes event handlers and sets null to controls and a data context when the WindowsFormsController is disposed")]
+        void Ex09()
+        {
+            var loadEventHandler = Substitute.For<Action>();
+            var clickEventHandler = Substitute.For<Action>();
+            var controller = (TestWindowsFormsControllers.TestDisposableWindowsFormsController)null;
+
+            Given("a view that contains the data context", () => View = new TestControls.TestControl { Name = "Control", DataContext = new TestDataContexts.TestDisposableDataContext() });
+            When("the view is set to the WindowsFormsController", () =>
+            {
+                WindowsFormsController.View = View;
+                controller = WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>();
+                controller.LoadAssertionHandler = loadEventHandler;
+                controller.ClickAssertionHandler = clickEventHandler;
+            });
+            Then("the dat context of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().DataContext == View.DataContext);
+
+            When("the handle of the view is created", () => View.RaiseHandleCreated());
+            Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == View);
+            When("the Load event is raised", () => View.RaiseLoad());
+            Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+            When("the Click event is raised", () => View.RaiseClick());
+            Then("the Click event should be handled", () => clickEventHandler.Received().Invoke());
+
+            loadEventHandler.ClearReceivedCalls();
+            clickEventHandler.ClearReceivedCalls();
+            When("the WindowsFormsController is disposed", () => WindowsFormsController.Dispose());
+            Then("the controller should be detached", () => !WindowsFormsController.GetControllers().Any());
+            Then("the data context of the controller should be null", () => controller.DataContext == null);
+            Then("the control of the controller should be null", () => controller.Control == null);
+            Then("the controller should be disposed", () => controller.IsDisposed);
+            When("the Load event is raised", () => View.RaiseLoad());
+            Then("the Load event should not be handled", () => loadEventHandler.DidNotReceive().Invoke());
+            When("the Click event is raised", () => View.RaiseClick());
+            Then("the Click event should not be handled", () => clickEventHandler.DidNotReceive().Invoke());
         }
     }
 }

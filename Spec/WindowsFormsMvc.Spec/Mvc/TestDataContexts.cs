@@ -8,6 +8,7 @@ namespace Charites.Windows.Mvc
     {
         public class TestDataContext { }
         public class MultiTestDataContext { }
+        public class TestDisposableDataContext { }
 
         public interface IAttachingTestDataContext { }
         public interface IAttachingTestDataContextFullName { }

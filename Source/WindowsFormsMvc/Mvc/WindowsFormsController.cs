@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -314,6 +314,23 @@ namespace Charites.Windows.Mvc
         /// Ensures the finder to find a type of a controller.
         /// </summary>
         protected void EnsureControllerTypeFinder() => ControllerTypeFinder = new WindowsFormsControllerTypeFinder(ControlKeyFinder, DataContextFinder);
+
+        /// <summary>
+        /// Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component" /> and optionally releases the managed resources.
+        /// Sets <c>null</c> to the <see cref="View"/> property in order to detach controllers from the view.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources. </param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed) return;
+
+            if (disposing) View = null;
+
+            base.Dispose(disposing);
+
+            disposed = true;
+        }
+        private bool disposed;
 
         private WindowsFormsControllerCollection EnsureControllers(bool force = false)
         {

@@ -47,6 +47,17 @@ namespace Charites.Windows.Mvc
         [View(Key = "Charites.Windows.Mvc.TestDataContexts+MultiTestDataContext")]
         public class MultiTestWindowsFormsControllerC : TestWindowsFormsControllerBase { }
 
+        [View(Key = "Charites.Windows.Mvc.TestDataContexts+TestDisposableDataContext")]
+        public class TestDisposableWindowsFormsController : TestWindowsFormsControllerBase, IDisposable
+        {
+            public bool IsDisposed { get; private set; }
+
+            public void Dispose()
+            {
+                IsDisposed = true;
+            }
+        }
+
         [View(ViewType = typeof(TestControls.SingleControllerView))]
         public class TestWindowsFormsControllerForSingleControllerView : TestWindowsFormsControllerBase { }
 
