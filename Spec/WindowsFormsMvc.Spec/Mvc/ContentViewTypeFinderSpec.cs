@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -41,6 +41,12 @@ namespace Charites.Windows.Mvc
                     Description = "When the content view is associated with the interface type",
                     Content = new TestDataContexts.InterfaceImplementedTestContent(),
                     ExpectedViewType = typeof(TestControls.TestContentViewSpecifiedByInterface)
+                };
+                yield return new
+                {
+                    Description = "When the content view is associated with the content type and priority is high",
+                    Content = new TestDataContexts.PriorityTestContent(),
+                    ExpectedViewType = typeof(TestControls.TestPriorityHighContentView)
                 };
             }
         }

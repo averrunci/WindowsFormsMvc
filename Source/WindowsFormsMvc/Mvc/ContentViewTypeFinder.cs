@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -41,7 +41,14 @@ namespace Charites.Windows.Mvc
         /// <returns>Tye type of the view that is associated with the specified type of the content.</returns>
         protected virtual Type SelectContentViewType(Type contentType)
             => AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes())
-                .FirstOrDefault(type => type.GetCustomAttribute<ContentViewAttribute>(true)?.ContentType == contentType);
+                .Select(type => new
+                {
+                    Type = type,
+                    ContentView = type.GetCustomAttribute<ContentViewAttribute>(true)
+                })
+                .Where(x => x.ContentView?.ContentType == contentType)
+                .OrderByDescending(x => x.ContentView.Priority)
+                .FirstOrDefault()?.Type;
 
         Type IContentViewTypeFinder.Find(object content)
             => content == null ? null : FindContentViewType(content);

@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -36,5 +36,11 @@ namespace Charites.Windows.Mvc
 
         [ContentView(typeof(TestDataContexts.ITestContent))]
         public class TestContentViewSpecifiedByInterface : TestControl { }
+
+        [ContentView(typeof(TestDataContexts.PriorityTestContent))]
+        public class TestPriorityLowContentView : TestControl { }
+
+        [ContentView(typeof(TestDataContexts.PriorityTestContent), Priority = 1)]
+        public class TestPriorityHighContentView : TestControl { }
     }
 }

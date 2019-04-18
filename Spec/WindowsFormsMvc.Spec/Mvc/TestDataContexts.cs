@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2019 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -28,5 +28,6 @@ namespace Charites.Windows.Mvc
         public class DerivedTestContent : BaseTestContent { }
         public class InterfaceImplementedTestContent : ITestContent { }
         public class EmptyContent { }
+        public class PriorityTestContent { }
     }
 }
