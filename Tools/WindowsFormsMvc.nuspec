@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>WindowsFormsMvc</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <title>Windows Forms MVC</title>
     <authors>averrunci</authors>
     <owners>averrunci</owners>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The class library for Windows Forms with Model View Controller</description>
     <language>en-US</language>
-    <copyright>Copyright (C) 2018 Fievus</copyright>
+    <copyright>Copyright (C) 2018-2019 Fievus</copyright>
     <tags>winforms mvc charites</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="net46"/>
