@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Carna, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Carna.1.5.1\lib\netstandard2.0\Carna.dll</HintPath>
+    <Reference Include="Carna, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Carna.1.6.0\lib\netstandard2.0\Carna.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
