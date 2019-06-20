@@ -92,6 +92,7 @@
     <Compile Include="Mvc\WindowsFormsEventHandlerAction.cs" />
     <Compile Include="Mvc\WindowsFormsEventHandlerExtension.cs" />
     <Compile Include="Mvc\WindowsFormsEventHandlerItem.cs" />
+    <Compile Include="Mvc\WindowsFormsParameterDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
