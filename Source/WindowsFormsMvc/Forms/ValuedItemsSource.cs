@@ -180,10 +180,10 @@ namespace Charites.Windows.Forms
             }
 
             /// <summary>
-            /// Releases the <see cref="ObservableProperty{T}.PropertyValueChanged"/> event handler.
+            /// Releases the <see cref="BindableProperty{T}.PropertyValueChanged"/> event handler.
             /// </summary>
             /// <param name="disposing">
-            /// <c>true</c> to release the <see cref="ObservableProperty{T}.PropertyValueChanged"/> event handler.
+            /// <c>true</c> to release the <see cref="BindableProperty{T}.PropertyValueChanged"/> event handler.
             /// </param>
             protected virtual void Dispose(bool disposing)
             {
