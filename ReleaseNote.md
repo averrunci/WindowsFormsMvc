@@ -1,6 +1,16 @@
 # Release note
 
-## V1.2.0
+## v1.3.0
+
+### Add
+
+- Add the function to inject dependencies of parameters based on the FromDIAttribute attribute.
+
+### Changes
+
+- Change Charites version to 1.3.0.
+
+## v1.2.0
 
 ### Add
 
@@ -17,7 +27,7 @@
 
 - Fixed to remove event handlers from controllers and sets null to controls and a data context of them when the WindowsFormsController is disposed.
 
-## V1.1.0
+## v1.1.0
 
 ### Add
 
