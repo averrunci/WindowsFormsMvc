@@ -1,57 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{822BDA12-64FC-4F49-B5ED-E3F9ABB9385B}</ProjectGuid>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Charites.Windows.Samples.SimpleLoginDemo.Adapter</RootNamespace>
-    <AssemblyName>SimpleLoginDemo.Adapter</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Version>2.0.0</Version>
+    <Authors>averrunci</Authors>
+    <Copyright>Copyright (C) 2020 Fievus</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceExtensions.cs" />
-    <Compile Include="User\UserAuthentication.cs" />
+    <ProjectReference Include="..\SimpleLoginDemo.Presentation\SimpleLoginDemo.Presentation.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SimpleLoginDemo.Presentation\SimpleLoginDemo.Presentation.csproj">
-      <Project>{277d8163-9ac5-407b-86bb-3f9caf9ac4db}</Project>
-      <Name>SimpleLoginDemo.Presentation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

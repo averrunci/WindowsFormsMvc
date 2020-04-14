@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsMvc", "Source\WindowsFormsMvc\WindowsFormsMvc.csproj", "{F78A4F77-EEBE-4CB2-95AA-BCF929DC2D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsFormsMvc", "Source\WindowsFormsMvc\WindowsFormsMvc.csproj", "{F78A4F77-EEBE-4CB2-95AA-BCF929DC2D3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsMvc.Spec", "Spec\WindowsFormsMvc.Spec\WindowsFormsMvc.Spec.csproj", "{78919BA8-5D4C-498E-B4EA-EE1B45138F89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsFormsMvc.Spec", "Spec\WindowsFormsMvc.Spec\WindowsFormsMvc.Spec.csproj", "{78919BA8-5D4C-498E-B4EA-EE1B45138F89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

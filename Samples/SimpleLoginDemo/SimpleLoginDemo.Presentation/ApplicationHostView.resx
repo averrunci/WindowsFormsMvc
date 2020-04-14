@@ -121,24 +121,25 @@
   <data name="titleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="titleLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="titleLabel.Font" type="System.Drawing.Font, System.Drawing.Common">
     <value>Yu Gothic UI, 24pt, style=Bold</value>
   </data>
-  <data name="titleLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="titleLabel.Location" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>0, 0</value>
   </data>
-  <data name="titleLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="titleLabel.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>1200, 120</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="titleLabel.TabIndex" type="System.Int32, mscorlib">
+  <assembly alias="System.Runtime" name="System.Runtime, Version=4.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="titleLabel.TabIndex" type="System.Int32, System.Runtime">
     <value>0</value>
   </data>
   <data name="titleLabel.Text" xml:space="preserve">
     <value>Simple Login Demo</value>
   </data>
-  <data name="titleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="titleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing.Common">
     <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;titleLabel.Name" xml:space="preserve">
@@ -156,22 +157,22 @@
   <data name="footerLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="footerLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="footerLabel.Font" type="System.Drawing.Font, System.Drawing.Common">
     <value>Yu Gothic UI, 10pt</value>
   </data>
-  <data name="footerLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="footerLabel.Location" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>0, 852</value>
   </data>
-  <data name="footerLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="footerLabel.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>1200, 48</value>
   </data>
-  <data name="footerLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="footerLabel.TabIndex" type="System.Int32, System.Runtime">
     <value>1</value>
   </data>
   <data name="footerLabel.Text" xml:space="preserve">
-    <value>Copyright (C) 2018 Fievus</value>
+    <value>Copyright (C) 2020 Fievus</value>
   </data>
-  <data name="footerLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="footerLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing.Common">
     <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;footerLabel.Name" xml:space="preserve">
@@ -189,13 +190,13 @@
   <data name="contentControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="contentControl.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="contentControl.Location" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>0, 120</value>
   </data>
-  <data name="contentControl.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="contentControl.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>1200, 732</value>
   </data>
-  <data name="contentControl.TabIndex" type="System.Int32, mscorlib">
+  <data name="contentControl.TabIndex" type="System.Int32, System.Runtime">
     <value>2</value>
   </data>
   <data name="&gt;&gt;contentControl.Name" xml:space="preserve">
@@ -210,19 +211,19 @@
   <data name="&gt;&gt;contentControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="dataContextSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="dataContextSource.TrayLocation" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, System.Runtime">
     <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing.Primitives">
     <value>144, 144</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing.Common">
     <value>Yu Gothic UI, 12pt</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>1200, 900</value>
   </data>
   <data name="&gt;&gt;dataContextSource.Name" xml:space="preserve">

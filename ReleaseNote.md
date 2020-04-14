@@ -1,5 +1,11 @@
 # Release note
 
+## v2.0.0
+
+### Changes
+
+- Change the fremework version to .NET Core 3.0.
+
 ## v1.3.0
 
 ### Add

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <Copyright>Copyright (C) 2020 Fievus</Copyright>
+    <Authors>averrunci</Authors>
+    <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Carna.ConsoleRunner" Version="1.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleLoginDemo.Presentation.Spec\SimpleLoginDemo.Presentation.Spec.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="carna-runner-settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

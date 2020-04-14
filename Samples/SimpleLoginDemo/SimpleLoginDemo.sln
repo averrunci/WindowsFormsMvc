@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLoginDemo", "SimpleLoginDemo\SimpleLoginDemo.csproj", "{74B9DD48-5722-40C6-B3F0-73CA4243FC2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLoginDemo.Presentation", "SimpleLoginDemo.Presentation\SimpleLoginDemo.Presentation.csproj", "{277D8163-9AC5-407B-86BB-3F9CAF9AC4DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsMvc", "..\..\Source\WindowsFormsMvc\WindowsFormsMvc.csproj", "{F78A4F77-EEBE-4CB2-95AA-BCF929DC2D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsFormsMvc", "..\..\Source\WindowsFormsMvc\WindowsFormsMvc.csproj", "{F78A4F77-EEBE-4CB2-95AA-BCF929DC2D3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLoginDemo.Adapter", "SimpleLoginDemo.Adapter\SimpleLoginDemo.Adapter.csproj", "{822BDA12-64FC-4F49-B5ED-E3F9ABB9385B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLoginDemo.Presentation.Spec", "SimpleLoginDemo.Presentation.Spec\SimpleLoginDemo.Presentation.Spec.csproj", "{D5219D94-4279-4DA1-A751-4DF5B2467CFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLoginDemoSpecRunner", "SimpleLoginDemoSpecRunner\SimpleLoginDemoSpecRunner.csproj", "{B5FD6E44-34D5-4CBE-B907-A634D86A1F4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D5219D94-4279-4DA1-A751-4DF5B2467CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5219D94-4279-4DA1-A751-4DF5B2467CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5219D94-4279-4DA1-A751-4DF5B2467CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5FD6E44-34D5-4CBE-B907-A634D86A1F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5FD6E44-34D5-4CBE-B907-A634D86A1F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5FD6E44-34D5-4CBE-B907-A634D86A1F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5FD6E44-34D5-4CBE-B907-A634D86A1F4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

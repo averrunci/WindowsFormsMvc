@@ -1,103 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F78A4F77-EEBE-4CB2-95AA-BCF929DC2D3D}</ProjectGuid>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Charites.Windows</RootNamespace>
     <AssemblyName>WindowsFormsMvc</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Charites.Windows</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Authors>averrunci</Authors>
+    <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
+    <PackageTags>winforms mvc charites</PackageTags>
+    <Copyright>Copyright (C) 2020 Fievus</Copyright>
+    <Version>2.0.0</Version>
+    <Description>The class library for Windows Forms with Model View Controller.</Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageLicenseFile></PackageLicenseFile>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>..\..\Binary\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Binary\Debug\WindowsFormsMvc.xml</DocumentationFile>
+    <DocumentationFile>..\..\Binary\Debug\netcoreapp3.0\WindowsFormsMvc.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <OutputPath>..\..\Binary\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Binary\Release\WindowsFormsMvc.xml</DocumentationFile>
+    <DocumentationFile>..\..\Binary\Release\netcoreapp3.0\WindowsFormsMvc.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Charites, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Charites.1.3.0\lib\netstandard2.0\Charites.dll</HintPath>
-    </Reference>
-    <Reference Include="Charites.Bindings, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Charites.Bindings.1.2.0\lib\netstandard2.0\Charites.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Compile Update="Forms\ContentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Mvc\DataContextSource.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Mvc\WindowsFormsController.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Forms\BoundPropertyBinding.cs" />
-    <Compile Include="Forms\CheckedListBoxItemsSource.cs" />
-    <Compile Include="Forms\CheckStateExtensions.cs" />
-    <Compile Include="Forms\ContentControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\IBindablePropertyBinding.cs" />
-    <Compile Include="Forms\IObservablePropertyBinding.cs" />
-    <Compile Include="Forms\ItemsSource.cs" />
-    <Compile Include="Forms\ListBoxItemsSource.cs" />
-    <Compile Include="Forms\ComboBoxItemsSource.cs" />
-    <Compile Include="Forms\ListViewItemBinding.cs" />
-    <Compile Include="Forms\ListViewItemContext.cs" />
-    <Compile Include="Forms\ListViewItemBoundEventArgs.cs" />
-    <Compile Include="Forms\ListViewItemsSource.cs" />
-    <Compile Include="Forms\ObservablePropertyBinding.cs" />
-    <Compile Include="Forms\ObservablePropertyBindings.cs" />
-    <Compile Include="Forms\TabControlItemsSource.cs" />
-    <Compile Include="Mvc\UnhandledException.cs" />
-    <Compile Include="Forms\ValuedItemsSource.cs" />
-    <Compile Include="Mvc\ContentViewAttribute.cs" />
-    <Compile Include="Mvc\ContentViewTypeFinder.cs" />
-    <Compile Include="Mvc\DataContextChangedEventArgs.cs" />
-    <Compile Include="Mvc\DataContextSource.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Mvc\IContentViewTypeFinder.cs" />
-    <Compile Include="Mvc\IWindowsFormsControlKeyFinder.cs" />
-    <Compile Include="Mvc\WindowsFormsControlInjector.cs" />
-    <Compile Include="Mvc\WindowsFormsControllerCollection.cs" />
-    <Compile Include="Mvc\WindowsFormsDataContextFinder.cs" />
-    <Compile Include="Mvc\IWindowsFormsControlInjector.cs" />
-    <Compile Include="Mvc\IWindowsFormsDataContextFinder.cs" />
-    <Compile Include="Mvc\IWindowsFormsControllerExtension.cs" />
-    <Compile Include="Mvc\IWindowsFormsControllerFactory.cs" />
-    <Compile Include="Mvc\IWindowsFormsControllerTypeFinder.cs" />
-    <Compile Include="Mvc\WindowsFormsController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Mvc\WindowsFormsControllerFactory.cs" />
-    <Compile Include="Mvc\WindowsFormsControllerTypeFinder.cs" />
-    <Compile Include="Mvc\WindowsFormsEventHandlerAction.cs" />
-    <Compile Include="Mvc\WindowsFormsEventHandlerExtension.cs" />
-    <Compile Include="Mvc\WindowsFormsEventHandlerItem.cs" />
-    <Compile Include="Mvc\WindowsFormsParameterDependencyResolver.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <PackageReference Include="Charites" Version="1.3.0" />
+    <PackageReference Include="Charites.Bindings" Version="1.2.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

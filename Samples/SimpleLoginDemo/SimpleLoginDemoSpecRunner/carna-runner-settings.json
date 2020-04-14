@@ -5,7 +5,7 @@
   "reporters": [
     {
       "reporter": {
-        "type": "Carna.ConsoleRunner.Reporters.ConsoleFixtureReporter,CarnaConsoleRunner",
+        "type": "Carna.ConsoleRunner.Reporters.ConsoleFixtureReporter,Carna.ConsoleRunner",
         "options": {
           "full": true,
           "stepVisible": true

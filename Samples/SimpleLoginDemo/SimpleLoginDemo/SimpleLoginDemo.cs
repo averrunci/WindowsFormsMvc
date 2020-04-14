@@ -1,37 +1,31 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2020 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
-using System;
 using System.Threading;
-using System.Windows.Forms;
-using Charites.Windows.Mvc;
-using Charites.Windows.Samples.SimpleLoginDemo.Presentation;
-using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo
 {
-    internal static class SimpleLoginDemo
+    internal class SimpleLoginDemo : IHostedService
     {
-        [STAThread]
-        private static void Main()
+        private readonly ISimpleLoginDemoApplication application;
+
+        public SimpleLoginDemo(ISimpleLoginDemoApplication application)
         {
-            AppDomain.CurrentDomain.UnhandledException += OnAppDomainUnhandledException;
-            Application.ThreadException += OnApplicationThreadException;
-
-            WindowsFormsController.DefaultControllerFactory = new SimpleLoginDemoControllerFactory();
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(new ApplicationHost(new LoginContent())));
+            this.application = application;
         }
 
-        private static void HandledUnhandledException(Exception exception) => MessageBox.Show(exception.ToString());
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            application.Run();
+            return Task.CompletedTask;
+        }
 
-        private static void OnAppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
-            => HandledUnhandledException(e.ExceptionObject as Exception);
-
-        private static void OnApplicationThreadException(object sender, ThreadExceptionEventArgs e)
-            => HandledUnhandledException(e.Exception);
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
