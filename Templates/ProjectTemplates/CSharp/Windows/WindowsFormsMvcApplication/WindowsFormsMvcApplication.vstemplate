@@ -1,0 +1,29 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Windows Forms Mvc App (.NET Core)</Name>
+    <Description>A project for creating an application with a Windows Forms (WinForms) user interface using the Model-View-Controller architecture</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>WindowsFormsMvcApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon Package="{FAE04EC1-301F-11d3-BF4B-00C04F79EFBC}" ID="4554" />
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="WindowsFormsMvcApp.csproj" File="WindowsFormsMvcApp.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="I$projectname$Application.cs">IWindowsFormsMvcAppApplication.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MainForm.cs">MainForm.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MainForm.Designer.cs">MainForm.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ServiceExtensions.cs">ServiceExtensions.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.cs">WindowsFormsMvcApp.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$Application.cs">WindowsFormsMvcAppApplication.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$ControllerFactory.cs">WindowsFormsMvcAppControllerFactory.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
