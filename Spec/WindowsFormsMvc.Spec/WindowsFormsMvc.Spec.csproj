@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>Charites.Windows</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
@@ -14,6 +14,7 @@
     <FileVersion>2.0.0</FileVersion>
     <Description>The specification class library for Windows Forms with Model View Controller.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <DisableWinExeOutputInference>true</DisableWinExeOutputInference>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Forms\TestItemView.cs">
