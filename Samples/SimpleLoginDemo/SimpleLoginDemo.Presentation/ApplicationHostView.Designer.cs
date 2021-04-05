@@ -34,6 +34,7 @@
             this.footerLabel = new System.Windows.Forms.Label();
             this.contentControl = new Charites.Windows.Forms.ContentControl();
             this.dataContextSource = new Charites.Windows.Mvc.DataContextSource(this.components);
+            this.windowsFormsController = new Charites.Windows.Mvc.WindowsFormsController(this.components);
             this.SuspendLayout();
             // 
             // titleLabel
@@ -59,6 +60,10 @@
             // dataContextSource
             // 
             this.dataContextSource.DataContextChanged += new Charites.Windows.Mvc.DataContextChangedEventHandler(this.dataContextSource_DataContextChanged);
+            //
+            // windowsFormsController
+            //
+            this.windowsFormsController.View = this;
             // 
             // ApplicationHostView
             // 
@@ -80,5 +85,6 @@
         private System.Windows.Forms.Label footerLabel;
         private Forms.ContentControl contentControl;
         private Mvc.DataContextSource dataContextSource;
+        private Mvc.WindowsFormsController windowsFormsController;
     }
 }

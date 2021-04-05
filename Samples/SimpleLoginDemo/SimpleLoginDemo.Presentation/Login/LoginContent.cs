@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -8,14 +8,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Charites.Windows.Mvc.Bindings;
-using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Home;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
 {
-    public class LoginContent : ILoginDemoContent
+    public class LoginContent
     {
-        public event EventHandler<ContentRequestedEventArgs> ContentRequested;
-
         [DisplayName]
         [Required]
         public ObservableProperty<string> UserId { get; } = string.Empty.ToObservableProperty();
@@ -53,14 +50,5 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
 
             CanLogin.Bind(context => !UserId.HasErrors && !Password.HasErrors, UserId, Password);
         }
-
-        public void Login()
-        {
-            if (!IsValid) return;
-
-            OnContentRequested(new ContentRequestedEventArgs(new HomeContent(UserId.Value)));
-        }
-
-        protected virtual void OnContentRequested(ContentRequestedEventArgs e) => ContentRequested?.Invoke(this, e);
-    }
+}
 }

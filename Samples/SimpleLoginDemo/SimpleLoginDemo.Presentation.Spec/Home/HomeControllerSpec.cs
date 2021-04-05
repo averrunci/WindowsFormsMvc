@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -14,15 +14,15 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Home
     [Specification("HomeController Spec")]
     class HomeControllerSpec : FixtureSteppable
     {
-        HomeController Controller { get; } = new HomeController();
+        HomeController Controller { get; set; }
         WindowsFormsController WindowsFormsController { get; } = new WindowsFormsController();
 
         HomeContent HomeContent { get; } = new HomeContent("User");
-        EventHandler<ContentRequestedEventArgs> ContentRequestedEventHandler { get; } = Substitute.For<EventHandler<ContentRequestedEventArgs>>();
+        IContentNavigator Navigator { get; } = Substitute.For<IContentNavigator>();
 
         public HomeControllerSpec()
         {
-            HomeContent.ContentRequested += ContentRequestedEventHandler;
+            Controller = new HomeController(Navigator);
 
             WindowsFormsController.SetDataContext(HomeContent, Controller);
         }
@@ -35,9 +35,17 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Home
                     .GetBy("logoutButton")
                     .Raise(nameof(Control.Click))
             );
-            Then("the ContentRequested event should be raised", () =>
-                ContentRequestedEventHandler.Received(1).Invoke(HomeContent, Arg.Is<ContentRequestedEventArgs>(e => e.Content is LoginContent))
-            );
+            Then("the content should be navigated to the LoginContent", () =>
+            {
+                Navigator.Received(1).NavigateTo(Arg.Any<LoginContent>());
+            });
+        }
+
+        [Example("When the IContentNavigator is not specified")]
+        void Ex02()
+        {
+            When("a controller to which the IContentNavigator is no specified is created", () => new HomeController(null));
+            Then<ArgumentNullException>($"{typeof(ArgumentNullException)} should be thrown");
         }
     }
 }

@@ -1,17 +1,18 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
 using System.Windows.Forms;
 using Carna;
 using Charites.Windows.Mvc;
+using NSubstitute;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
 {
     [Context("Login panel location")]
     class LoginControllerSpec_LoginPanelLocation : FixtureSteppable
     {
-        LoginController Controller { get; } = new LoginController(null);
+        LoginController Controller { get; } = new LoginController(Substitute.For<IContentNavigator>(), null);
         WindowsFormsController WindowsFormsController { get; } = new WindowsFormsController();
 
         LoginView LoginView { get; } = new LoginView { Name = "LoginView", Width = 800, Height = 600 };

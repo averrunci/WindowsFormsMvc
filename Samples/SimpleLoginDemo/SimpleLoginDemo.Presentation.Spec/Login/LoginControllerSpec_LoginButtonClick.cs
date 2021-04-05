@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -20,13 +20,12 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
         WindowsFormsController WindowsFormsController { get; } = new WindowsFormsController();
 
         LoginContent LoginContent { get; } = new LoginContent { Message = { Value = "message" } };
+        IContentNavigator Navigator { get; } = Substitute.For<IContentNavigator>();
         IUserAuthentication UserAuthentication { get; } = Substitute.For<IUserAuthentication>();
-        EventHandler<ContentRequestedEventArgs> ContentRequestedEventHandler { get; } = Substitute.For<EventHandler<ContentRequestedEventArgs>>();
 
         public LoginControllerSpec_LoginButtonClick()
         {
-            Controller = new LoginController(UserAuthentication);
-            LoginContent.ContentRequested += ContentRequestedEventHandler;
+            Controller = new LoginController(Navigator, UserAuthentication);
 
             WindowsFormsController.SetDataContext(LoginContent, Controller);
         }
@@ -47,20 +46,28 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
                     .GetBy("loginButton")
                     .RaiseAsync(nameof(Control.Click))
             );
-            Then("the ContentRequested event should be raised", () =>
-                ContentRequestedEventHandler.Received(1).Invoke(
-                    LoginContent,
-                    Arg.Is<ContentRequestedEventArgs>(e => (e.Content as HomeContent).UserId == LoginContent.UserId.Value)
-                )
-            );
+            Then("the content should be navigated to the HomeContent", () =>
+            {
+                Navigator.Received(1).NavigateTo(Arg.Is<HomeContent>(content => content.UserId == LoginContent.UserId.Value));
+            });
+        }
+
+        [Example("When the IContentNavigator is not specified")]
+        void Ex02()
+        {
+            When("a controller to which the IContentNavigator is not specified is created", () =>
+            {
+                Controller = new LoginController(null, UserAuthentication);
+            });
+            Then<ArgumentNullException>($"{typeof(ArgumentNullException)} should be thrown");
         }
 
         [Example("When the IUserAuthentication is not specified")]
-        void Ex02()
+        void Ex03()
         {
             Given("a controller to which the IUserAuthentication is not specified", () =>
             {
-                Controller = new LoginController(null);
+                Controller = new LoginController(Navigator, null);
                 WindowsFormsController.SetDataContext(LoginContent, Controller);
             });
             When("the login button is clicked", async () =>
@@ -68,14 +75,15 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
                     .GetBy("loginButton")
                     .RaiseAsync(nameof(Control.Click))
             );
-            Then("the ContentRequested event should not be raised", () =>
-                ContentRequestedEventHandler.DidNotReceive().Invoke(Arg.Any<object>(), Arg.Any<ContentRequestedEventArgs>())
-            );
+            Then("the content should not be navigated to any contents.", () =>
+            {
+                Navigator.DidNotReceive().NavigateTo(Arg.Any<object>());
+            });
             Then("the LoginNotAvailable message should be set", () => LoginContent.Message.Value == Resources.LoginNotAvailable);
         }
 
         [Example("When the login content is not valid")]
-        void Ex03()
+        void Ex04()
         {
             When("the invalid user id and password are set", () =>
             {
@@ -87,13 +95,14 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
                     .GetBy("loginButton")
                     .RaiseAsync(nameof(Control.Click))
             );
-            Then("the ContentRequested event should not be raised", () =>
-                ContentRequestedEventHandler.DidNotReceive().Invoke(Arg.Any<object>(), Arg.Any<ContentRequestedEventArgs>())
-            );
+            Then("the content should not be navigated to any contents.", () =>
+            {
+                Navigator.DidNotReceive().NavigateTo(Arg.Any<object>());
+            });
         }
 
         [Example("When the user is not authenticated")]
-        void Ex04()
+        void Ex05()
         {
             When("the no authenticated user id and password are set", () =>
             {
@@ -108,9 +117,10 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
                     .GetBy("loginButton")
                     .RaiseAsync(nameof(Control.Click))
             );
-            Then("the ContentRequested event should not be raised", () =>
-                ContentRequestedEventHandler.DidNotReceive().Invoke(Arg.Any<object>(), Arg.Any<ContentRequestedEventArgs>())
-            );
+            Then("the content should not be navigated to any contents.", () =>
+            {
+                Navigator.DidNotReceive().NavigateTo(Arg.Any<object>());
+            });
             Then("the LoginFailureMessage message should be set", () => LoginContent.Message.Value == Resources.LoginFailureMessage);
         }
     }

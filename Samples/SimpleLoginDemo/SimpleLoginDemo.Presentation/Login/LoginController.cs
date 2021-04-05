@@ -1,11 +1,13 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
+using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Charites.Windows.Mvc;
+using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Home;
 using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Properties;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
@@ -13,6 +15,7 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
     [View(Key = nameof(LoginContent))]
     public class LoginController
     {
+        private readonly IContentNavigator navigator;
         private readonly IUserAuthentication userAuthentication;
 
         [DataContext]
@@ -24,8 +27,9 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
         [Element]
         private readonly Panel loginPanel = null;
 
-        public LoginController(IUserAuthentication userAuthentication)
+        public LoginController(IContentNavigator navigator, IUserAuthentication userAuthentication)
         {
+            this.navigator = navigator ?? throw new ArgumentNullException(nameof(navigator));
             this.userAuthentication = userAuthentication;
         }
 
@@ -58,7 +62,7 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login
             var result = await userAuthentication.Authenticate(currentLoginContent.UserId.Value, currentLoginContent.Password.Value);
             if (result.Success)
             {
-                currentLoginContent.Login();
+                navigator.NavigateTo(new HomeContent(loginContent.UserId.Value));
             }
             else
             {

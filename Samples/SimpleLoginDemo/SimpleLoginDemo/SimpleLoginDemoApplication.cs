@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2020 Fievus
+﻿// Copyright (C) 2020-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -7,7 +7,6 @@ using System.Threading;
 using System.Windows.Forms;
 using Charites.Windows.Mvc;
 using Charites.Windows.Samples.SimpleLoginDemo.Presentation;
-using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
 using Microsoft.Extensions.Hosting;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo
@@ -28,7 +27,7 @@ namespace Charites.Windows.Samples.SimpleLoginDemo
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            MainForm = new MainForm(new ApplicationHost(new LoginContent()));
+            MainForm = new MainForm(new ApplicationHost());
         }
 
         public void Run()
