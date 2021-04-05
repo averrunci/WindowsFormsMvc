@@ -1,10 +1,18 @@
 # Release note
 
+## v2.1.0
+
+### Changes
+
+- Change the framework version to .NET Core 3.1 and .NET 5.0.
+- Change Charites version to 1.3.1.
+- Change Charites.Bindings version to 1.2.1.
+
 ## v2.0.0
 
 ### Changes
 
-- Change the fremework version to .NET Core 3.0.
+- Change the framework version to .NET Core 3.0.
 
 ## v1.3.0
 

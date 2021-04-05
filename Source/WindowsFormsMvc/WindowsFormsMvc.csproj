@@ -8,14 +8,15 @@
     <Authors>averrunci</Authors>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
     <PackageTags>winforms mvc charites</PackageTags>
-    <Copyright>Copyright (C) 2020 Fievus</Copyright>
-    <Version>2.0.0</Version>
+    <Copyright>Copyright (C) 2020-2021 Fievus</Copyright>
+    <Version>2.1.0</Version>
     <Description>The class library for Windows Forms with Model View Controller.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile></PackageLicenseFile>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.1.0</AssemblyVersion>
+    <FileVersion>2.1.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\Binary\Debug\</OutputPath>
