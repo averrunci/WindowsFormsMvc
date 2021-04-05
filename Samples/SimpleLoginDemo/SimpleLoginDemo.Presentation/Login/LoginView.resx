@@ -117,66 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;loginButton.Name" xml:space="preserve">
-    <value>loginButton</value>
-  </data>
-  <data name="&gt;&gt;loginButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;loginButton.Parent" xml:space="preserve">
-    <value>loginPanel</value>
-  </data>
-  <data name="&gt;&gt;loginButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Name" xml:space="preserve">
-    <value>passwordTextBox</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Parent" xml:space="preserve">
-    <value>loginPanel</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;passwordHeaderLabel.Name" xml:space="preserve">
-    <value>passwordHeaderLabel</value>
-  </data>
-  <data name="&gt;&gt;passwordHeaderLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;passwordHeaderLabel.Parent" xml:space="preserve">
-    <value>loginPanel</value>
-  </data>
-  <data name="&gt;&gt;passwordHeaderLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;userIdTextBox.Name" xml:space="preserve">
-    <value>userIdTextBox</value>
-  </data>
-  <data name="&gt;&gt;userIdTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;userIdTextBox.Parent" xml:space="preserve">
-    <value>loginPanel</value>
-  </data>
-  <data name="&gt;&gt;userIdTextBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;userIdHeaderLabel.Name" xml:space="preserve">
-    <value>userIdHeaderLabel</value>
-  </data>
-  <data name="&gt;&gt;userIdHeaderLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;userIdHeaderLabel.Parent" xml:space="preserve">
-    <value>loginPanel</value>
-  </data>
-  <data name="&gt;&gt;userIdHeaderLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="loginPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>178, 127</value>
