@@ -25,7 +25,7 @@
     <ProjectReference Include="..\..\Source\WindowsFormsMvc\WindowsFormsMvc.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Carna.ConsoleRunner" Version="1.8.0" />
+    <PackageReference Include="Carna.ConsoleRunner" Version="1.8.2" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
   </ItemGroup>
 </Project>
