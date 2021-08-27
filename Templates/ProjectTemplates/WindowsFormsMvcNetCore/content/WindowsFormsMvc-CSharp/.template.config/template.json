@@ -1,0 +1,18 @@
+{
+  "author": "averrunci",
+  "name": "Windows Forms Mvc Application",
+  "description": "Windows Forms client application with the Model-View-Controller architecture.",
+  "groupIdentity": "WindowsFormsMvc",
+  "identity": "WindowsFormsMvc.CSharp",
+  "shortName": "winformsmvc",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "classifications": [
+    "Common",
+    "WindForms"
+  ],
+  "sourceName": "WindowsFormsMvcApp",
+  "preferNameDirectory": true
+}
