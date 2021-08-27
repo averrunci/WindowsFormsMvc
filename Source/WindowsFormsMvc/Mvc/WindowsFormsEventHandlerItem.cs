@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018-2019 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -53,7 +53,7 @@ namespace Charites.Windows.Mvc
         {
             if (element == null || handler == null || eventInfo == null) return;
 
-            eventInfo.AddMethod.Invoke(element, new object[] { handler });
+            eventInfo.AddMethod?.Invoke(element, new object[] { handler });
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Charites.Windows.Mvc
         {
             if (element == null || handler == null || eventInfo == null) return;
 
-            eventInfo.RemoveMethod.Invoke(element, new object[] { handler });
+            eventInfo.RemoveMethod?.Invoke(element, new object[] { handler });
         }
 
         /// <summary>
