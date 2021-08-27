@@ -1,5 +1,12 @@
 # Release note
 
+## v2.1.1
+
+### Changes
+
+- Change Charites version to 1.3.2.
+- Modify how to retrieve an event name from a method that represents an event handler using naming convention. If its name ends with "Async", it is ignored.
+
 ## v2.1.0
 
 ### Changes

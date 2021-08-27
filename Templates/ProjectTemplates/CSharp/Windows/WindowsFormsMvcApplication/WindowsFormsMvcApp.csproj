@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="WindowsFormsMvc" Version="2.1.0" />
+    <PackageReference Include="WindowsFormsMvc" Version="2.1.1" />
   </ItemGroup>
 
 </Project>

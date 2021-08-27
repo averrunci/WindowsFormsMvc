@@ -6,12 +6,12 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>averrunci</Authors>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Copyright>Copyright (C) 2020-2021 Fievus</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile></PackageLicenseFile>
-    <AssemblyVersion>2.1.0</AssemblyVersion>
-    <FileVersion>2.1.0</FileVersion>
+    <AssemblyVersion>2.1.1</AssemblyVersion>
+    <FileVersion>2.1.1</FileVersion>
     <Description>The specification class library for Windows Forms with Model View Controller.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <DisableWinExeOutputInference>true</DisableWinExeOutputInference>
