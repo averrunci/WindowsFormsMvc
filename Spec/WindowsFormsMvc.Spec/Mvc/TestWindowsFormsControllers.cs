@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018-2019 Fievus
+﻿// Copyright (C) 2018-2021 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -324,6 +324,68 @@ namespace Charites.Windows.Mvc
             public class EventHandlerController : Controller
             {
                 public void childControl_Click(object sender, EventArgs e) => handler(sender, e);
+                private readonly EventHandler handler;
+
+                public EventHandlerController(EventHandler assertionHandler)
+                {
+                    handler = assertionHandler;
+                }
+            }
+        }
+
+        public class AttributedToAsyncMethodUsingNamingConvention
+        {
+            public class Controller : ITestWindowsFormsController
+            {
+                protected void SetDataContext(object dataContext) => DataContext = dataContext;
+                public object DataContext { get; private set; }
+
+                [Element(Name = "control")]
+                protected void SetControl(Control control) => Control = control;
+                public Control Control { get; private set; }
+
+                [Element(Name = "childControl")]
+                protected void SetChildControl(Control childControl) => ChildControl = childControl;
+                public Control ChildControl { get; private set; }
+            }
+
+            public class NoArgumentHandlerController : Controller
+            {
+                public Task childControl_ClickAsync()
+                {
+                    handler();
+                    return Task.CompletedTask;
+                }
+                private readonly Action handler;
+
+                public NoArgumentHandlerController(Action assertionHandler)
+                {
+                    handler = assertionHandler;
+                }
+            }
+
+            public class OneArgumentHandlerController : Controller
+            {
+                public Task childControl_ClickAsync(EventArgs e)
+                {
+                    handler(e);
+                    return Task.CompletedTask;
+                }
+                private readonly Action<EventArgs> handler;
+
+                public OneArgumentHandlerController(Action<EventArgs> assertionHandler)
+                {
+                    handler = assertionHandler;
+                }
+            }
+
+            public class EventHandlerController : Controller
+            {
+                public Task childControl_ClickAsync(object sender, EventArgs e)
+                {
+                    handler(sender, e);
+                    return Task.CompletedTask;
+                }
                 private readonly EventHandler handler;
 
                 public EventHandlerController(EventHandler assertionHandler)
