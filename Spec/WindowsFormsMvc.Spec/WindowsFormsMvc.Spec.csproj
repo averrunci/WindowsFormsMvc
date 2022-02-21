@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <RootNamespace>Charites.Windows</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>averrunci</Authors>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
     <Version>2.1.1</Version>
-    <Copyright>Copyright (C) 2020-2021 Fievus</Copyright>
+    <Copyright>Copyright (C) 2022 Fievus</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile></PackageLicenseFile>
     <AssemblyVersion>2.1.1</AssemblyVersion>

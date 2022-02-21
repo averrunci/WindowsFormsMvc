@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2022 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -10,18 +10,18 @@ namespace Charites.Windows.Mvc
     class WindowsFormsControllerSpec
     {
         [Context]
-        WindowsFormsControllerSpec_EventHandlerDataContextControlInjection EventHandlerDataContextControlInjection { get; }
+        WindowsFormsControllerSpec_EventHandlerDataContextControlInjection EventHandlerDataContextControlInjection => default!;
 
         [Context]
-        WindowsFormsControllerSpec_AttachingAndDetachingController AttachingAndDetachingController { get; }
+        WindowsFormsControllerSpec_AttachingAndDetachingController AttachingAndDetachingController => default!;
 
         [Context]
-        WindowsFormsControllerSpec_DataContextChanged DataContextChanged { get; }
+        WindowsFormsControllerSpec_DataContextChanged DataContextChanged => default!;
 
         [Context]
-        WindowsFormsControllerSpec_WindowsFormsControllerExtension WindowsFormsControllerExtension { get; }
+        WindowsFormsControllerSpec_WindowsFormsControllerExtension WindowsFormsControllerExtension => default!;
 
         [Context]
-        WindowsFormsControllerSpec_UnhandledException UnhandledException { get; }
+        WindowsFormsControllerSpec_UnhandledException UnhandledException => default!;
     }
 }

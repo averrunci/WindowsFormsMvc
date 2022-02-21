@@ -4,9 +4,7 @@
 // of the MIT license.  See the LICENSE file for details.
 namespace Charites.Windows.Mvc;
 
-/// <summary>
-/// Provides the function to inject controls in a view to a controller.
-/// </summary>
-public interface IWindowsFormsControlInjector : IElementInjector<Control>
+internal sealed class WindowsFormsControlKeyFinder : IWindowsFormsControlKeyFinder
 {
+    string? IElementKeyFinder<Control>.FindKey(Control element) => null;
 }

@@ -1,73 +1,71 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2022 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
-using System;
 using System.Reflection;
 using Carna;
 
-namespace Charites.Windows.Mvc
+namespace Charites.Windows.Mvc;
+
+[Context("Unhandled exception")]
+class WindowsFormsControllerSpec_UnhandledException : FixtureSteppable, IDisposable
 {
-    [Context("Unhandled exception")]
-    class WindowsFormsControllerSpec_UnhandledException : FixtureSteppable, IDisposable
+    WindowsFormsController WindowsFormsController { get; } = new();
+
+    object Controller { get; set; } = default!;
+    TestControls.TestControl Control { get; set; } = default!;
+
+    Exception? UnhandledException { get; set; }
+    bool HandledException { get; set; }
+
+    public WindowsFormsControllerSpec_UnhandledException()
     {
-        WindowsFormsController WindowsFormsController { get; } = new WindowsFormsController();
+        WindowsFormsController.UnhandledException += OnWindowsFormsControllerUnhandledException;
+    }
 
-        object Controller { get; set; }
-        TestControls.TestControl Control { get; set; }
+    public void Dispose()
+    {
+        WindowsFormsController.UnhandledException -= OnWindowsFormsControllerUnhandledException;
+    }
 
-        Exception UnhandledException { get; set; }
-        bool HandledException { get; set; }
+    private void OnWindowsFormsControllerUnhandledException(object? sender, UnhandledExceptionEventArgs e)
+    {
+        UnhandledException = e.Exception;
+        e.Handled = HandledException;
+    }
 
-        public WindowsFormsControllerSpec_UnhandledException()
-        {
-            WindowsFormsController.UnhandledException += OnWindowsFormsControllerUnhandledException;
-        }
+    [Example("Handles an unhandled exception as it is handled")]
+    void Ex01()
+    {
+        HandledException = true;
 
-        public void Dispose()
-        {
-            WindowsFormsController.UnhandledException -= OnWindowsFormsControllerUnhandledException;
-        }
+        Given("a controller that has an event handler that throws an exception", () => Controller = new TestWindowsFormsControllers.ExceptionTestWindowsFormsController());
+        Given("a control", () => Control = new TestControls.TestControl());
 
-        private void OnWindowsFormsControllerUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            UnhandledException = e.Exception;
-            e.Handled = HandledException;
-        }
+        When("the controller is added", () => WindowsFormsController.GetControllers().Add(Controller));
+        When("the controller is attached to the control", () => WindowsFormsController.GetControllers().AttachTo(Control));
 
-        [Example("Handles an unhandled exception as it is handled")]
-        void Ex01()
-        {
-            HandledException = true;
+        When("the handle of the control is created", () => Control.RaiseHandleCreated());
 
-            Given("a controller that has an event handler that throws an exception", () => Controller = new TestWindowsFormsControllers.ExceptionTestWindowsFormsController());
-            Given("a control", () => Control = new TestControls.TestControl());
+        When("the Click event of the control is raised", () => Control.RaiseClick());
+        Then("the unhandled exception should be handled", () => UnhandledException != null);
+    }
 
-            When("the controller is added", () => WindowsFormsController.GetControllers().Add(Controller));
-            When("the controller is attached to the control", () => WindowsFormsController.GetControllers().AttachTo(Control));
+    [Example("Handles an unhandled exception as it is not handled")]
+    void Ex02()
+    {
+        HandledException = false;
 
-            When("the handle of the control is created", () => Control.RaiseHandleCreated());
+        Given("a controller that has an event handler that throws an exception", () => Controller = new TestWindowsFormsControllers.ExceptionTestWindowsFormsController());
+        Given("a control", () => Control = new TestControls.TestControl());
 
-            When("the Click event of the control is raised", () => Control.RaiseClick());
-            Then("the unhandled exception should be handled", () => UnhandledException != null);
-        }
+        When("the controller is added", () => WindowsFormsController.GetControllers().Add(Controller));
+        When("the controller is attached to the control", () => WindowsFormsController.GetControllers().AttachTo(Control));
 
-        [Example("Handles an unhandled exception as it is not handled")]
-        void Ex02()
-        {
-            HandledException = false;
+        When("the handle of the control is created", () => Control.RaiseHandleCreated());
 
-            Given("a controller that has an event handler that throws an exception", () => Controller = new TestWindowsFormsControllers.ExceptionTestWindowsFormsController());
-            Given("a control", () => Control = new TestControls.TestControl());
-
-            When("the controller is added", () => WindowsFormsController.GetControllers().Add(Controller));
-            When("the controller is attached to the control", () => WindowsFormsController.GetControllers().AttachTo(Control));
-
-            When("the handle of the control is created", () => Control.RaiseHandleCreated());
-
-            When("the Click event of the control is raised", () => Control.RaiseClick());
-            Then<TargetInvocationException>("the exception should be thrown");
-            Then("the unhandled exception should be handled", () => UnhandledException != null);
-        }
+        When("the Click event of the control is raised", () => Control.RaiseClick());
+        Then<TargetInvocationException>("the exception should be thrown");
+        Then("the unhandled exception should be handled", () => UnhandledException != null);
     }
 }
