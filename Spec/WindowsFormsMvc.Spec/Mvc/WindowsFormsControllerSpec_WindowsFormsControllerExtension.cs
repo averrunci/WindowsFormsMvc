@@ -41,10 +41,10 @@ class WindowsFormsControllerSpec_WindowsFormsControllerExtension : FixtureSteppa
         });
         When("the extension is added", () => WindowsFormsController.AddExtension(Extension));
         When("the handle of the view is created", () => View.RaiseHandleCreated());
-        Then("the extension should be attached", () => Extension.Received().Attach(Controller, View));
+        Then("the extension should be attached", () => Extension.Received(1).Attach(Controller, View));
 
         When("the view is disposed", () => View.Dispose());
-        Then("the extension should be detached", () => Extension.Received().Detach(Controller, View));
+        Then("the extension should be detached", () => Extension.Received(1).Detach(Controller, View));
     }
 
     [Example("Retrieves a container of an extension")]

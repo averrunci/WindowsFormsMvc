@@ -26,11 +26,11 @@ class DataContextSourceSpec : FixtureSteppable
     void Ex01()
     {
         When("a data context is set to the DataContextSource", () => DataContextSource.Value = DataContext);
-        Then("the DataContextChanged event should be raised", () => Handler.Received().Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == null && e.NewValue == DataContext)));
+        Then("the DataContextChanged event should be raised", () => Handler.Received(1).Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == null && e.NewValue == DataContext)));
 
         Handler.ClearReceivedCalls();
         When("another data context is set to the DataContextSource", () => DataContextSource.Value = AnotherDataContext);
-        Then("the DataContextChanged event should be raised", () => Handler.Received().Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == DataContext && e.NewValue == AnotherDataContext)));
+        Then("the DataContextChanged event should be raised", () => Handler.Received(1).Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == DataContext && e.NewValue == AnotherDataContext)));
 
         Handler.ClearReceivedCalls();
         When("the same data context is set to the DataContextSource", () => DataContextSource.Value = AnotherDataContext);
@@ -38,7 +38,7 @@ class DataContextSourceSpec : FixtureSteppable
 
         Handler.ClearReceivedCalls();
         When("null is set to the DataContextSource", () => DataContextSource.Value = null);
-        Then("the DataContextChanged event should be raised", () => Handler.Received().Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == AnotherDataContext && e.NewValue == null)));
+        Then("the DataContextChanged event should be raised", () => Handler.Received(1).Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == AnotherDataContext && e.NewValue == null)));
     }
 
     [Example("Sets null to the Value property when the DataContextSource is disposed")]
@@ -49,6 +49,6 @@ class DataContextSourceSpec : FixtureSteppable
         Handler.ClearReceivedCalls();
         When("the DataContextSource is disposed", () => DataContextSource.Dispose());
         Then("the value of the DataContextSource should be null", () => DataContextSource.Value == null);
-        Then("the DataContextChanged event should be raised", () => Handler.Received().Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == DataContext && e.NewValue == null)));
+        Then("the DataContextChanged event should be raised", () => Handler.Received(1).Invoke(DataContextSource, Arg.Is<DataContextChangedEventArgs>(e => e.OldValue == DataContext && e.NewValue == null)));
     }
 }

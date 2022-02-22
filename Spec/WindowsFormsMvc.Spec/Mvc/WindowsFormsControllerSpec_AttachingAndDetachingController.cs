@@ -126,9 +126,9 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
         When("the handle of the view is created", () => View.RaiseHandleCreated());
         Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == View);
         When("the Load event is raised", () => View.RaiseLoad());
-        Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+        Then("the Load event should be handled", () => loadEventHandler.Received(1).Invoke());
         When("the Click event is raised", () => View.RaiseClick());
-        Then("the Click event should be handled", () => clickEventHandler.Received().Invoke());
+        Then("the Click event should be handled", () => clickEventHandler.Received(1).Invoke());
 
         loadEventHandler.ClearReceivedCalls();
         clickEventHandler.ClearReceivedCalls();
@@ -162,9 +162,9 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
         When("the handle of the view is created", () => View.RaiseHandleCreated());
         Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == View);
         When("the Load event is raised", () => View.RaiseLoad());
-        Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+        Then("the Load event should be handled", () => loadEventHandler.Received(1).Invoke());
         When("the Click event is raised", () => View.RaiseClick());
-        Then("the Click event should be handled", () => clickEventHandler.Received().Invoke());
+        Then("the Click event should be handled", () => clickEventHandler.Received(1).Invoke());
 
         loadEventHandler.ClearReceivedCalls();
         clickEventHandler.ClearReceivedCalls();
@@ -230,7 +230,7 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
                 .GetBy("Control")
                 .Raise("Load")
         );
-        Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+        Then("the Load event should be handled", () => loadEventHandler.Received(1).Invoke());
     }
 
     [Example("Retrieves event handlers and executes them asynchronously when a  view is not attached")]
@@ -245,7 +245,7 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
                 .GetBy("Control")
                 .RaiseAsync("Load")
         );
-        Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+        Then("the Load event should be handled", () => loadEventHandler.Received(1).Invoke());
     }
 
     [Example("Removes event handlers and sets null to controls and a data context when the WindowsFormsController is disposed")]
@@ -268,9 +268,9 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
         When("the handle of the view is created", () => View.RaiseHandleCreated());
         Then("the control of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDisposableWindowsFormsController>().Control == View);
         When("the Load event is raised", () => View.RaiseLoad());
-        Then("the Load event should be handled", () => loadEventHandler.Received().Invoke());
+        Then("the Load event should be handled", () => loadEventHandler.Received(1).Invoke());
         When("the Click event is raised", () => View.RaiseClick());
-        Then("the Click event should be handled", () => clickEventHandler.Received().Invoke());
+        Then("the Click event should be handled", () => clickEventHandler.Received(1).Invoke());
 
         loadEventHandler.ClearReceivedCalls();
         clickEventHandler.ClearReceivedCalls();
