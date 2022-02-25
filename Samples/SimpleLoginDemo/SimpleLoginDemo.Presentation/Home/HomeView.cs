@@ -1,38 +1,32 @@
-﻿// Copyright (C) 2018 Fievus
+﻿// Copyright (C) 2022 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
-using System.Windows.Forms;
 using Charites.Windows.Mvc;
 
-namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Home
+namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Home;
+
+[ContentView(typeof(HomeContent))]
+public partial class HomeView : UserControl
 {
-    [ContentView(typeof(HomeContent))]
-    public partial class HomeView : UserControl
+    public HomeView()
     {
-        public HomeView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void BindContent(HomeContent homeContent)
-        {
-            if (homeContent == null) return;
+    private void BindContent(HomeContent homeContent)
+    {
+        messageLabel.Text = homeContent.Message;
+    }
 
-            messageLabel.Text = homeContent.Message;
-        }
+    private void UnbindContent(HomeContent homeContent)
+    {
+        messageLabel.Text = string.Empty;
+    }
 
-        private void UnbindContent(HomeContent homeContent)
-        {
-            if (homeContent == null) return;
-
-            messageLabel.Text = string.Empty;
-        }
-
-        private void dataContextSource_DataContextChanged(object sender, Mvc.DataContextChangedEventArgs e)
-        {
-            UnbindContent(e.OldValue as HomeContent);
-            BindContent(e.NewValue as HomeContent);
-        }
+    private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
+    {
+        if (e.OldValue is HomeContent oldContent) UnbindContent(oldContent);
+        if (e.NewValue is HomeContent newContent) BindContent(newContent);
     }
 }

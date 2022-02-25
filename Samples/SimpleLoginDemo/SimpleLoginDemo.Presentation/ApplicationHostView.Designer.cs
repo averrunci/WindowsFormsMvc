@@ -55,14 +55,13 @@
             // 
             resources.ApplyResources(this.contentControl, "contentControl");
             this.contentControl.Name = "contentControl";
-            this.contentControl.TabStop = false;
             // 
             // dataContextSource
             // 
             this.dataContextSource.DataContextChanged += new Charites.Windows.Mvc.DataContextChangedEventHandler(this.dataContextSource_DataContextChanged);
-            //
+            // 
             // windowsFormsController
-            //
+            // 
             this.windowsFormsController.View = this;
             // 
             // ApplicationHostView

@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
     <RootNamespace>Charites.Windows.Samples.SimpleLoginDemo.Presentation</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
@@ -9,7 +11,7 @@
     <AssemblyVersion>2.1.0</AssemblyVersion>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Copyright (C) 2020-2021 Fievus</Copyright>
+    <Copyright>Copyright (C) 2022 Fievus</Copyright>
     <Authors>averrunci</Authors>
   </PropertyGroup>
   <ItemGroup>
@@ -17,7 +19,7 @@
     <ProjectReference Include="..\SimpleLoginDemo.Presentation\SimpleLoginDemo.Presentation.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Carna" Version="1.8.0" />
-    <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="Carna" Version="2.0.0" />
+    <PackageReference Include="NSubstitute" Version="4.3.0" />
   </ItemGroup>
 </Project>
