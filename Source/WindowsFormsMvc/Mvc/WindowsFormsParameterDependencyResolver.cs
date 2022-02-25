@@ -18,6 +18,6 @@ internal sealed class WindowsFormsParameterDependencyResolver : ParameterDepende
 
     protected override object? ResolveParameterFromDependency(ParameterInfo parameter)
     {
-        return WindowsFormsController.DefaultControllerFactory.Create(parameter.ParameterType) ?? base.ResolveParameterFromDependency(parameter);
+        return base.ResolveParameterFromDependency(parameter) ?? WindowsFormsController.DefaultControllerFactory.Create(parameter.ParameterType);
     }
 }
