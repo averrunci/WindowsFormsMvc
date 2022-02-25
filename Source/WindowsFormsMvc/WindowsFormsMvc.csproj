@@ -11,22 +11,22 @@
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
     <PackageTags>winforms mvc charites</PackageTags>
     <Copyright>Copyright (C) 2022 Fievus</Copyright>
-    <Version>2.1.1</Version>
+    <Version>3.0.0</Version>
     <Description>The class library for Windows Forms with Model View Controller.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile></PackageLicenseFile>
-    <AssemblyVersion>2.1.1</AssemblyVersion>
-    <FileVersion>2.1.1</FileVersion>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <FileVersion>3.0.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\Binary\Debug\</OutputPath>
-    <DocumentationFile>..\..\Binary\Debug\netcoreapp3.0\WindowsFormsMvc.xml</DocumentationFile>
+    <DocumentationFile>..\..\Binary\Debug\net6.0-windows\WindowsFormsMvc.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\..\Binary\Release\</OutputPath>
-    <DocumentationFile>..\..\Binary\Release\netcoreapp3.0\WindowsFormsMvc.xml</DocumentationFile>
+    <DocumentationFile>..\..\Binary\Release\net6.0-windows\WindowsFormsMvc.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Forms\ContentControl.cs">

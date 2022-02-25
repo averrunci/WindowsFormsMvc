@@ -95,8 +95,6 @@ public class LoginView : UserControl
 
     private void BindContent(LoginContent loginContent)
     {
-        if (loginContent == null) return;
-
         // The value of the model is bound to the property of the Control.
         observablePropertyBindings.BindTwoWay(loginContent.UserId.Value, userIdTextBox, nameof(userIdTextBox.Text));
         ...
@@ -104,16 +102,14 @@ public class LoginView : UserControl
 
     private void UnbindContent(LoginContent loginContent)
     {
-        if (loginContent == null) return;
-
-        // The value of the model is unbound to the property of the Control.
+        // The value of the model is unbound from the property of the Control.
         observablePropertyBindings.Unbind();
     }
 
-    private void dataContextSource_DataContextChanged(object sender, DataContextChangedEventArgs e)
+    private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
     {
-        UnbindContent(e.OldValue as LoginContent);
-        BindContent(e.NewValue as LoginContent);
+        if (e.OldValue is LoginContent as oldContent) UnbindContent(oldContent);
+        if (e.NewValue is LoginContent as newContent) BindContent(newContent);
     }
 }
 ```
@@ -196,7 +192,7 @@ private void OnActionButtonClick(EventArgs e)
 
 ``` csharp
 [EventHandler(ElementName = "ActionButton", Event = "Click")]
-private void OnActionButtonClick(object sender, EventArgs e)
+private void OnActionButtonClick(object? sender, EventArgs e)
 {
     // implements the action.
 }
@@ -214,7 +210,7 @@ private void ActionButton_Click(EventArgs e)
     // implements the action.
 }
 
-private void ActionButton_Click(object sender, EventArgs e)
+private void ActionButton_Click(object? sender, EventArgs e)
 {
     // implements the action.
 }
@@ -233,7 +229,7 @@ private async Task ActionButton_ClickAsync(EventArgs e)
     // implements the action.
 }
 
-private async Task ActionButton_ClickAsync(object sender, EventArgs e)
+private async Task ActionButton_ClickAsync(object? sender, EventArgs e)
 {
     // implements the action.
 }
@@ -254,7 +250,7 @@ private void ActionButton_Click(EventArgs e, [FromDI] IDataLoader dataLoader)
     // implements the action.
 }
 
-private void ActionButton_Click(object sender, EventArgs e, [FromDI] IDataLoader dataLoader)
+private void ActionButton_Click(object? sender, EventArgs e, [FromDI] IDataLoader dataLoader)
 {
     // implements the action.
 }
@@ -270,34 +266,34 @@ The implementation is as follows;
 
 ``` csharp
 [DataContext]
-private DataContexType dataContext;
+private DataContexType? dataContext;
 ```
 
 - Property
 
 ``` csharp
 [DataContext]
-public DataContexType DataContext { get; set; }
+public DataContexType? DataContext { get; set; }
 ```
 
 - Method
 
 ``` csharp
 [DataContext]
-public void SetDataContext(DataContexType dataContext)
+public void SetDataContext(DataContexType? dataContext)
 {
     this.dataContext = dataContext;
 }
-private DataContexType dataContext;
+private DataContexType? dataContext;
 ```
 
 If the method name is "SetDataContext", this attribute does not have to be specified.
 ``` csharp
-private void SetDataContext(DataContextType dataContext)
+private void SetDataContext(DataContextType? dataContext)
 {
     this.dataContext = dataContext;
 }
-private DataContextType dataContext;
+private DataContextType? dataContext;
 ```
 
 #### ElementAttribute
@@ -314,25 +310,25 @@ The implementation to inject a control whose name is "Element" is as follows;
 
 ``` csharp
 [Element(Name = "Control")]
-private Control control;
+private Control? control;
 ```
 
 - Property
 
 ``` csharp
 [Element]
-public Control Control { get; set; }
+public Control? Control { get; set; }
 ```
 
 - Method
 
 ``` csharp
 [Element]
-public void SetControl(Control control)
+public void SetControl(Control? control)
 {
     this.control = control;
 }
-private Control control;
+private Control? control;
 ```
 
 ## NuGet

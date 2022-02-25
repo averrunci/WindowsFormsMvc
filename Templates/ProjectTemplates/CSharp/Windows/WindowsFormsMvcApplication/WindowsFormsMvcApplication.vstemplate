@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Windows Forms Mvc App (.NET Core)</Name>
-    <Description>A project for creating an application with a Windows Forms (WinForms) user interface using the Model-View-Controller architecture</Description>
+    <Name>Windows Forms Mvc App</Name>
+    <Description>A project template for creating a .NET Windows Forms (WinForms) app using the Model-View-Controller architecture.</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>

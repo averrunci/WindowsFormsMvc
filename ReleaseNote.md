@@ -1,5 +1,15 @@
 # Release note
 
+## v3.0.0
+
+### Changes
+
+- Change the target framework version to .NET 6.0.
+- Change Charites version to 2.0.0.
+- Change Charites.Bindings version to 2.0.0.
+- Enable Nullable reference types.
+- Change to prefer to resolve parameters with the specified resolver when they are resolved by dependecies.
+
 ## v2.1.1
 
 ### Changes
