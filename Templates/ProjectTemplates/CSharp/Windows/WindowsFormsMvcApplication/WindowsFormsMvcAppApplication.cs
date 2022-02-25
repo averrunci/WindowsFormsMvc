@@ -1,51 +1,45 @@
-﻿using System;
-using System.Threading;
-using System.Windows.Forms;
-using Charites.Windows.Mvc;
+﻿using Charites.Windows.Mvc;
 using Microsoft.Extensions.Hosting;
 
-namespace $safeprojectname$
+namespace $safeprojectname$;
+
+internal class $safeprojectname$Application : ApplicationContext, I$safeprojectname$Application
 {
-    internal class $safeprojectname$Application : ApplicationContext, I$safeprojectname$Application
+    private readonly IHostApplicationLifetime lifetime;
+
+    public $safeprojectname$Application(IHostApplicationLifetime lifetime, IWindowsFormsControllerFactory controllerFactory)
     {
-        private readonly IHostApplicationLifetime lifetime;
+        this.lifetime = lifetime;
 
-        public $safeprojectname$Application(IHostApplicationLifetime lifetime, IWindowsFormsControllerFactory controllerFactory)
-        {
-            this.lifetime = lifetime ?? throw new ArgumentNullException(nameof(lifetime));
+        WindowsFormsController.UnhandledException += OnWindowsFormsControllerUnhandledException;
+        WindowsFormsController.DefaultControllerFactory = controllerFactory;
 
-            WindowsFormsController.UnhandledException += OnWindowsFormsControllerUnhandledException;
-            WindowsFormsController.DefaultControllerFactory = controllerFactory;
+        Application.ThreadException += OnApplicationThreadException;
+        ApplicationConfiguration.Initialize();
 
-            Application.ThreadException += OnApplicationThreadException;
-            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            MainForm = new MainForm();
-        }
-
-        public void Run()
-        {
-            Application.Run(this);
-        }
-
-        protected override void ExitThreadCore()
-        {
-            base.ExitThreadCore();
-
-            lifetime.StopApplication();
-        }
-
-        private static void HandleUnhandledException(Exception exception) => MessageBox.Show(exception.ToString());
-
-        private static void OnWindowsFormsControllerUnhandledException(object sender, Charites.Windows.Mvc.UnhandledExceptionEventArgs e)
-        {
-            HandleUnhandledException(e.Exception);
-            e.Handled = true;
-        }
-
-        private static void OnApplicationThreadException(object sender, ThreadExceptionEventArgs e)
-            => HandleUnhandledException(e.Exception);
+        MainForm = new MainForm();
     }
+
+    public void Run()
+    {
+        Application.Run(this);
+    }
+
+    protected override void ExitThreadCore()
+    {
+        base.ExitThreadCore();
+
+        lifetime.StopApplication();
+    }
+
+    private static void HandleUnhandledException(Exception exception) => MessageBox.Show(exception.ToString());
+
+    private static void OnWindowsFormsControllerUnhandledException(object? sender, Charites.Windows.Mvc.UnhandledExceptionEventArgs e)
+    {
+        HandleUnhandledException(e.Exception);
+        e.Handled = true;
+    }
+
+    private static void OnApplicationThreadException(object? sender, ThreadExceptionEventArgs e)
+        => HandleUnhandledException(e.Exception);
 }

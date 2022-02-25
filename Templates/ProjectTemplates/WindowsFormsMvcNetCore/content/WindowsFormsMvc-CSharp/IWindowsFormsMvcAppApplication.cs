@@ -1,7 +1,6 @@
-﻿namespace WindowsFormsMvcApp
+﻿namespace WindowsFormsMvcApp;
+
+public interface IWindowsFormsMvcAppApplication
 {
-    public interface IWindowsFormsMvcAppApplication
-    {
-        void Run();
-    }
+    void Run();
 }

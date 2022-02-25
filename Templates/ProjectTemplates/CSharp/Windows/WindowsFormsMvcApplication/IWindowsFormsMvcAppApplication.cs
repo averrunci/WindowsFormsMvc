@@ -1,7 +1,6 @@
-﻿namespace $safeprojectname$
+﻿namespace $safeprojectname$;
+
+public interface I$safeprojectname$Application
 {
-    public interface I$safeprojectname$Application
-    {
-        void Run();
-    }
+    void Run();
 }

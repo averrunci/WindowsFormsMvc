@@ -1,21 +1,16 @@
-﻿using System;
-using Charites.Windows.Mvc;
+﻿using Charites.Windows.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WindowsFormsMvcApp
+namespace WindowsFormsMvcApp;
+
+public class WindowsFormsMvcAppControllerFactory : IWindowsFormsControllerFactory
 {
-    public class WindowsFormsMvcAppControllerFactory : IWindowsFormsControllerFactory
+    private readonly IServiceProvider services;
+
+    public WindowsFormsMvcAppControllerFactory(IServiceProvider services)
     {
-        private readonly IServiceProvider services;
-
-        public WindowsFormsMvcAppControllerFactory(IServiceProvider services)
-        {
-            this.services = services ?? throw new ArgumentNullException(nameof(services));
-        }
-
-        public object Create(Type controllerType)
-        {
-            return services.GetRequiredService(controllerType);
-        }
+        this.services = services;
     }
+
+    public object Create(Type controllerType) => services.GetRequiredService(controllerType);
 }

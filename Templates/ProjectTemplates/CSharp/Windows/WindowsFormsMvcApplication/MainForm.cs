@@ -1,13 +1,9 @@
-﻿using System.Windows.Forms;
+﻿namespace $safeprojectname$;
 
-namespace $safeprojectname$
+public partial class MainForm : Form
 {
-    public partial class MainForm : Form
+    public MainForm()
     {
-        public MainForm()
-        {
-            InitializeComponent();
-        }
-
+        InitializeComponent();
     }
 }
