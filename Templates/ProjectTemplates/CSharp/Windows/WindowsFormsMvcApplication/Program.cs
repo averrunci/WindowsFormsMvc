@@ -8,9 +8,9 @@ namespace $safeprojectname$;
 internal static class Program
 {
     [STAThread]
-    private static async Task Main()
+    private static void Main()
     {
-        await CreateHostBuilder().Build().RunAsync();
+        CreateHostBuilder().Build().Run();
     }
     
     private static IHostBuilder CreateHostBuilder()
