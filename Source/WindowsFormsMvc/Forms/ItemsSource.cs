@@ -24,7 +24,7 @@ public abstract class ItemsSource<TControl, TItem> where TControl : Control
     /// </summary>
     protected bool IsItemBound { get; private set; }
 
-    private INotifyCollectionChanged? items;
+    private IEnumerable? items;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ItemsSource{TControl,TItem}"/> class
@@ -43,12 +43,12 @@ public abstract class ItemsSource<TControl, TItem> where TControl : Control
     /// <exception cref="InvalidOperationException">
     /// This control has already bound another items.
     /// </exception>
-    public void Bind(INotifyCollectionChanged items)
+    public void Bind(IEnumerable items)
     {
         if (IsItemBound) throw new InvalidOperationException("This control has already bound another items.");
 
         this.items = items;
-        items.CollectionChanged += OnItemCollectionChanged;
+        if (this.items is INotifyCollectionChanged notifyCollectionChanged) notifyCollectionChanged.CollectionChanged += OnItemCollectionChanged;
 
         OnItemsBinding(GetItems());
 
@@ -65,7 +65,7 @@ public abstract class ItemsSource<TControl, TItem> where TControl : Control
     {
         if (!IsItemBound || items is null) throw new InvalidOperationException("This control has not bound any items yet.");
 
-        items.CollectionChanged -= OnItemCollectionChanged;
+        if (items is INotifyCollectionChanged notifyCollectionChanged) notifyCollectionChanged.CollectionChanged -= OnItemCollectionChanged;
 
         OnItemsUnbinding(GetItems());
 
@@ -137,7 +137,7 @@ public abstract class ItemsSource<TControl, TItem> where TControl : Control
     /// Gets the bound items.
     /// </summary>
     /// <returns>The bound items.</returns>
-    protected IList<TItem> GetItems() => (items as IEnumerable)?.Cast<TItem>().ToList() ?? new List<TItem>();
+    protected IList<TItem> GetItems() => items?.OfType<TItem>().ToList() ?? new List<TItem>();
 
     private void InsertItems(int startIndex, IList<TItem> items)
     {
