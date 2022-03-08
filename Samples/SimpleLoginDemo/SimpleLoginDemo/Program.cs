@@ -14,8 +14,8 @@ namespace Charites.Windows.Samples.SimpleLoginDemo;
 internal static class Program
 {
     [STAThread]
-    private static async Task Main()
-        => await CreateHostBuilder().Build().RunAsync();
+    private static void Main()
+        => CreateHostBuilder().Build().Run();
 
     private static IHostBuilder CreateHostBuilder()
         => Host.CreateDefaultBuilder()
