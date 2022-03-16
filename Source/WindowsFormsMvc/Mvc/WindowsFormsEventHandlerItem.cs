@@ -2,6 +2,7 @@
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
+using System.ComponentModel;
 using System.Reflection;
 
 namespace Charites.Windows.Mvc;
@@ -9,7 +10,7 @@ namespace Charites.Windows.Mvc;
 /// <summary>
 /// Represents an item of an event handler.
 /// </summary>
-public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Control>
+public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Component>
 {
     private readonly EventInfo? eventInfo;
 
@@ -30,7 +31,7 @@ public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Control>
     /// handler with the default condition that it will not be invoked if the event
     /// is already marked handled.
     /// </param>
-    public WindowsFormsEventHandlerItem(string elementName, Control? element, string eventName, EventInfo? eventInfo, Delegate? handler, bool handledEventsToo) : base(elementName, element, eventName, handler, handledEventsToo)
+    public WindowsFormsEventHandlerItem(string elementName, Component? element, string eventName, EventInfo? eventInfo, Delegate? handler, bool handledEventsToo) : base(elementName, element, eventName, handler, handledEventsToo)
     {
         this.eventInfo = eventInfo;
     }
@@ -46,7 +47,7 @@ public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Control>
     /// handler with the default condition that it will not be invoked if the event
     /// is already marked handled.
     /// </param>
-    protected override void AddEventHandler(Control element, Delegate handler, bool handledEventsToo)
+    protected override void AddEventHandler(Component element, Delegate handler, bool handledEventsToo)
     {
         eventInfo?.AddMethod?.Invoke(element, new object[] { handler });
     }
@@ -56,7 +57,7 @@ public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Control>
     /// </summary>
     /// <param name="element">The element from which the specified event handler is removed.</param>
     /// <param name="handler">The event handler to remove.</param>
-    protected override void RemoveEventHandler(Control element, Delegate handler)
+    protected override void RemoveEventHandler(Component element, Delegate handler)
     {
         eventInfo?.RemoveMethod?.Invoke(element, new object[] { handler });
     }

@@ -17,9 +17,13 @@ class WindowsFormsControllerSpec_EventHandlerDataContextControlInjection : Fixtu
     TestControls.TestControl ChildControl { get; set; } = default!;
 
     static bool EventHandled { get; set; }
+    private static bool ComponentEventHandled { get; set; }
     static Action NoArgumentAssertionHandler { get; } = () => EventHandled = true;
+    static Action NoArgumentComponentEventAssertionHandler { get; } = () => ComponentEventHandled = true;
     static Action<EventArgs> OneArgumentAssertionHandler { get; } = _ => EventHandled = true;
+    static Action<EventArgs> OneArgumentComponentEventAssertionHandler { get; } = _ => ComponentEventHandled = true;
     static EventHandler AssertionEventHandler { get; } = (_, _) => EventHandled = true;
+    static EventHandler ComponentEventAssertionEventHandler { get; } = (_, _) => ComponentEventHandled = true;
 
     [Example("Adds event handlers")]
     [Sample(Source = typeof(WindowsFormsControllerSampleDataSource))]
@@ -39,16 +43,24 @@ class WindowsFormsControllerSpec_EventHandlerDataContextControlInjection : Fixtu
         Then("the data context of the controller should be set", () => controller.DataContext == DataContext);
         Then("the control of the controller should be null", () => controller.Control == null);
         Then("the child control of the controller should be null", () => controller.ChildControl == null);
+        Then("the component of the controller should be null", () => controller.TestComponent == null);
 
         When("the handle of the control is created", () => Control.RaiseHandleCreated());
 
         Then("the data context of the controller should be set", () => controller.DataContext == DataContext);
         Then("the control of the controller should be set", () => controller.Control == Control);
         Then("the child control of the controller should be set", () => controller.ChildControl == ChildControl);
+        Then("the component of the controller should be set", () => controller.TestComponent == Control.GetTestComponent());
 
         EventHandled = false;
+        ComponentEventHandled = false;
         When("the Click event of the child control is raised", () => ChildControl.RaiseClick());
-        Then("the Click event should be handled", () => EventHandled);
+        Then("the Click event should be handled", () => EventHandled && !ComponentEventHandled);
+
+        EventHandled = false;
+        ComponentEventHandled = false;
+        When("the Component event of the control is raised", () => Control.RaiseTestComponentUpdated());
+        Then("the Component event should be handled", () => !EventHandled && ComponentEventHandled);
     }
 
     [Example("Sets controls")]
@@ -61,6 +73,7 @@ class WindowsFormsControllerSpec_EventHandlerDataContextControlInjection : Fixtu
         When("the control is set to the controller", () => WindowsFormsController.SetControl(Control, controller, true));
         Then("the control should be set to the controller", () => controller.Control == Control);
         Then("the child control should be set to the controller", () => controller.ChildControl == ChildControl);
+        Then("the component should be set to the controller", () => controller.TestComponent == Control.GetTestComponent());
     }
 
     [Example("Sets a data context")]
@@ -79,77 +92,77 @@ class WindowsFormsControllerSpec_EventHandlerDataContextControlInjection : Fixtu
             yield return new
             {
                 Description = "When the contents are attributed to fields and the event handler has no argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToField.NoArgumentHandlerController(NoArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToField.NoArgumentHandlerController(NoArgumentAssertionHandler, NoArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to fields and the event handler has one argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToField.OneArgumentHandlerController(OneArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToField.OneArgumentHandlerController(OneArgumentAssertionHandler, OneArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to fields and the event handler has two arguments.",
-                Controller = new TestWindowsFormsControllers.AttributedToField.EventHandlerController(AssertionEventHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToField.EventHandlerController(AssertionEventHandler, ComponentEventAssertionEventHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to properties and the event handler has no argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToProperty.NoArgumentHandlerController(NoArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToProperty.NoArgumentHandlerController(NoArgumentAssertionHandler, NoArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to properties and the event handler has one argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToProperty.OneArgumentHandlerController(OneArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToProperty.OneArgumentHandlerController(OneArgumentAssertionHandler, OneArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to properties and the event handler has two arguments.",
-                Controller = new TestWindowsFormsControllers.AttributedToProperty.EventHandlerController(AssertionEventHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToProperty.EventHandlerController(AssertionEventHandler, ComponentEventAssertionEventHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to methods and the event handler has no argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToMethod.NoArgumentHandlerController(NoArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToMethod.NoArgumentHandlerController(NoArgumentAssertionHandler, NoArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to methods and the event handler has one argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToMethod.OneArgumentHandlerController(OneArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToMethod.OneArgumentHandlerController(OneArgumentAssertionHandler, OneArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to methods and the event handler has two arguments.",
-                Controller = new TestWindowsFormsControllers.AttributedToMethod.EventHandlerController(AssertionEventHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToMethod.EventHandlerController(AssertionEventHandler, ComponentEventAssertionEventHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to methods using a naming convention and the event handler has no argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.NoArgumentHandlerController(NoArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.NoArgumentHandlerController(NoArgumentAssertionHandler, NoArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to methods using a naming convention and the event handler has one argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.OneArgumentHandlerController(OneArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.OneArgumentHandlerController(OneArgumentAssertionHandler, OneArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to methods using a naming convention and the event handler has two arguments.",
-                Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.EventHandlerController(AssertionEventHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToMethodUsingNamingConvention.EventHandlerController(AssertionEventHandler, ComponentEventAssertionEventHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to async methods using a naming convention and the event handler has no argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToAsyncMethodUsingNamingConvention.NoArgumentHandlerController(NoArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToAsyncMethodUsingNamingConvention.NoArgumentHandlerController(NoArgumentAssertionHandler, NoArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to async methods using a naming convention and the event handler has one argument.",
-                Controller = new TestWindowsFormsControllers.AttributedToAsyncMethodUsingNamingConvention.OneArgumentHandlerController(OneArgumentAssertionHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToAsyncMethodUsingNamingConvention.OneArgumentHandlerController(OneArgumentAssertionHandler, OneArgumentComponentEventAssertionHandler)
             };
             yield return new
             {
                 Description = "When the contents are attributed to async methods using a naming convention and the event handler has two arguments.",
-                Controller = new TestWindowsFormsControllers.AttributedToAsyncMethodUsingNamingConvention.EventHandlerController(AssertionEventHandler)
+                Controller = new TestWindowsFormsControllers.AttributedToAsyncMethodUsingNamingConvention.EventHandlerController(AssertionEventHandler, ComponentEventAssertionEventHandler)
             };
         }
     }

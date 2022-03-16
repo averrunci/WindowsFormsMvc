@@ -237,8 +237,8 @@ public class WindowsFormsController : Component
     /// </summary>
     /// <param name="controller">The controller that has event handlers.</param>
     /// <returns>The event handlers that the specified controller has.</returns>
-    public EventHandlerBase<Control, WindowsFormsEventHandlerItem> EventHandlersOf(object controller)
-        => Retrieve<WindowsFormsEventHandlerExtension, EventHandlerBase<Control, WindowsFormsEventHandlerItem>>(controller);
+    public EventHandlerBase<Component, WindowsFormsEventHandlerItem> EventHandlersOf(object controller)
+        => Retrieve<WindowsFormsEventHandlerExtension, EventHandlerBase<Component, WindowsFormsEventHandlerItem>>(controller);
 
     /// <summary>
     /// Attaches controllers to the specified view.

@@ -2,6 +2,7 @@
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
+using System.ComponentModel;
 using Carna;
 using NSubstitute;
 
@@ -13,8 +14,8 @@ class WindowsFormsControllerSpec_WindowsFormsControllerExtension : FixtureSteppa
     class TestExtension : IWindowsFormsControllerExtension
     {
         public static object TestExtensionContainer { get; } = new();
-        public void Attach(object controller, Control element) { }
-        public void Detach(object controller, Control element) { }
+        public void Attach(object controller, Component element) { }
+        public void Detach(object controller, Component element) { }
         public object Retrieve(object controller) => TestExtensionContainer;
     }
 
