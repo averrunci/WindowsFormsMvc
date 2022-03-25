@@ -1,5 +1,17 @@
 # Release note
 
+## v3.1.0
+
+### Add
+
+- Add the ListItemToIndexConverter class that converts an item in a list to its index.
+
+### Changes
+
+- Change Charites.Bindings version to 2.1.0.
+- Change the type of the parameter of the Bind method in the ItemsSource class to IEnumerable from INotifyCollectionChanged.
+- Change to be able to handle events of components and inject components to a controller.
+
 ## v3.0.0
 
 ### Changes
