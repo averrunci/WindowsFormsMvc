@@ -11,47 +11,33 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
 [View(Key = nameof(LoginContent))]
 public class LoginController
 {
-    [DataContext]
-    private readonly LoginContent? loginContent = null;
-
-    [Element(Name = "LoginView")]
-    private readonly LoginView? loginView = null;
-
-    [Element]
-    private readonly Panel? loginPanel = null;
-
     [EventHandler(Event = nameof(UserControl.Load))]
-    void OnLoad()
+    private void OnLoad([FromElement(Name = "LoginView")] LoginView loginView, [FromElement] Panel loginPanel)
     {
-        OnSizeChanged();
+        OnSizeChanged(loginView, loginPanel);
     }
 
     [EventHandler(Event = nameof(Control.SizeChanged))]
-    void OnSizeChanged()
+    private void OnSizeChanged([FromElement(Name = "LoginView")] LoginView loginView, [FromElement] Panel loginPanel)
     {
-        if (loginView is null || loginPanel is null) return;
-
         loginPanel.Location = new Point((loginView.Width - loginPanel.Width) / 2, (loginView.Height - loginPanel.Height) / 2);
     }
 
     [EventHandler(ElementName = "loginButton", Event = nameof(Control.Click))]
-    private async Task OnLoginButtonClickAsync([FromDI] IContentNavigator navigator, [FromDI] IUserAuthentication userAuthentication)
+    private async Task OnLoginButtonClickAsync([FromDataContext] LoginContent loginContent, [FromDI] IContentNavigator navigator, [FromDI] ILoginCommand command)
     {
-        if (loginContent is null) return;
-
         loginContent.Message.Value = string.Empty;
 
         if (!loginContent.IsValid) return;
 
-        var currentLoginContent = loginContent;
-        var result = await userAuthentication.Authenticate(currentLoginContent.UserId.Value, currentLoginContent.Password.Value);
+        var result = await command.Authenticate(loginContent);
         if (result.Success)
         {
             navigator.NavigateTo(new HomeContent(loginContent.UserId.Value));
         }
         else
         {
-            currentLoginContent.Message.Value = Resources.LoginFailureMessage;
+            loginContent.Message.Value = Resources.LoginFailureMessage;
         }
     }
 }

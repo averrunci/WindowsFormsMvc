@@ -18,12 +18,7 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
 
     LoginContent LoginContent { get; } = new() { Message = { Value = "message" } };
     IContentNavigator Navigator { get; } = Substitute.For<IContentNavigator>();
-    IUserAuthentication UserAuthentication { get; } = Substitute.For<IUserAuthentication>();
-
-    public LoginControllerSpec_LoginButtonClick()
-    {
-        WindowsFormsController.SetDataContext(LoginContent, Controller);
-    }
+    ILoginCommand LoginCommand { get; } = Substitute.For<ILoginCommand>();
 
     [Example("When the user is authenticated")]
     void Ex01()
@@ -33,14 +28,15 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
             LoginContent.UserId.Value = "user";
             LoginContent.Password.Value = "password";
 
-            UserAuthentication.Authenticate(LoginContent.UserId.Value, LoginContent.Password.Value)
-                .Returns(Task.FromResult(UserAuthenticationResult.Succeeded()));
+            LoginCommand.Authenticate(LoginContent)
+                .Returns(Task.FromResult(LoginAuthenticationResult.Succeeded()));
         });
         When("the login button is clicked", async () =>
             await WindowsFormsController.EventHandlersOf(Controller)
                 .GetBy("loginButton")
-                .Resolve<IContentNavigator>(() => Navigator)
-                .Resolve<IUserAuthentication>(() => UserAuthentication)
+                .ResolveFromDataContext(LoginContent)
+                .ResolveFromDI<IContentNavigator>(() => Navigator)
+                .ResolveFromDI<ILoginCommand>(() => LoginCommand)
                 .RaiseAsync(nameof(Control.Click))
         );
         Then("the content should be navigated to the HomeContent", () =>
@@ -60,12 +56,13 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
         When("the login button is clicked", async () =>
             await WindowsFormsController.EventHandlersOf(Controller)
                 .GetBy("loginButton")
-                .Resolve<IContentNavigator>(() => Navigator)
-                .Resolve<IUserAuthentication>(() => UserAuthentication)
+                .ResolveFromDataContext(LoginContent)
+                .ResolveFromDI<IContentNavigator>(() => Navigator)
+                .ResolveFromDI<ILoginCommand>(() => LoginCommand)
                 .RaiseAsync(nameof(Control.Click))
         );
         Then("the authentication should not be executed", () =>
-            UserAuthentication.DidNotReceive().Authenticate(Arg.Any<string>(), Arg.Any<string>()));
+            LoginCommand.DidNotReceive().Authenticate(Arg.Any<LoginContent>()));
         Then("the content should not be navigated to any contents.", () =>
         {
             Navigator.DidNotReceive().NavigateTo(Arg.Any<object>());
@@ -80,14 +77,15 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
             LoginContent.UserId.Value = "user";
             LoginContent.Password.Value = "password";
 
-            UserAuthentication.Authenticate(LoginContent.UserId.Value, LoginContent.Password.Value)
-                .Returns(UserAuthenticationResult.Failed());
+            LoginCommand.Authenticate(LoginContent)
+                .Returns(LoginAuthenticationResult.Failed());
         });
         When("the login button is clicked", async () =>
             await WindowsFormsController.EventHandlersOf(Controller)
                 .GetBy("loginButton")
-                .Resolve<IContentNavigator>(() => Navigator)
-                .Resolve<IUserAuthentication>(() => UserAuthentication)
+                .ResolveFromDataContext(LoginContent)
+                .ResolveFromDI<IContentNavigator>(() => Navigator)
+                .ResolveFromDI<ILoginCommand>(() => LoginCommand)
                 .RaiseAsync(nameof(Control.Click))
         );
         Then("the content should not be navigated to any contents.", () =>

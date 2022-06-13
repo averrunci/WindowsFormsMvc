@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Charites.Windows.Samples.SimpleLoginDemo.Presentation</RootNamespace>
+    <Version>3.2.0</Version>
+    <Copyright>Copyright (C) 2022 Fievus</Copyright>
+    <AssemblyVersion>3.2.0</AssemblyVersion>
+    <FileVersion>3.2.0</FileVersion>
+    <Authors>averrunci</Authors>
+    <Company>averrunci</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>

@@ -2,9 +2,9 @@
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
-namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
+namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Features.Users;
 
 public interface IUserAuthentication
 {
-    Task<UserAuthenticationResult> Authenticate(string userId, string password);
+    UserAuthenticationResult Authenticate(User user);
 }

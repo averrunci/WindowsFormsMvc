@@ -15,13 +15,7 @@ class HomeControllerSpec : FixtureSteppable
     HomeController Controller { get; } = new();
     WindowsFormsController WindowsFormsController { get; } = new();
 
-    HomeContent HomeContent { get; } = new("User");
     IContentNavigator Navigator { get; } = Substitute.For<IContentNavigator>();
-
-    public HomeControllerSpec()
-    {
-        WindowsFormsController.SetDataContext(HomeContent, Controller);
-    }
 
     [Example("Logs out")]
     void Ex01()
@@ -29,7 +23,7 @@ class HomeControllerSpec : FixtureSteppable
         When("the log out button is clicked", () =>
             WindowsFormsController.EventHandlersOf(Controller)
                 .GetBy("logoutButton")
-                .Resolve<IContentNavigator>(() => Navigator)
+                .ResolveFromDI<IContentNavigator>(() => Navigator)
                 .Raise(nameof(Control.Click))
         );
         Then("the content should be navigated to the LoginContent", () =>

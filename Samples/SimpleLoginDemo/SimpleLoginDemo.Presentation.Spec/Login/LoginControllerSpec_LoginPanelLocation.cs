@@ -36,6 +36,8 @@ class LoginControllerSpec_LoginPanelLocation : FixtureSteppable
         When("the Load event is raised", () =>
             WindowsFormsController.EventHandlersOf(Controller)
                 .GetBy(null)
+                .ResolveFromElement(LoginView.Name, LoginView)
+                .ResolveFromElement(LoginPanel.Name, LoginPanel)
                 .Raise(nameof(UserControl.Load))
         );
         AssertLoginPanelLocation();
@@ -47,6 +49,8 @@ class LoginControllerSpec_LoginPanelLocation : FixtureSteppable
         When("the SizeChanged event is raised", () =>
             WindowsFormsController.EventHandlersOf(Controller)
                 .GetBy(null)
+                .ResolveFromElement(LoginView.Name, LoginView)
+                .ResolveFromElement(LoginPanel.Name, LoginPanel)
                 .Raise(nameof(Control.SizeChanged))
         );
         AssertLoginPanelLocation();
