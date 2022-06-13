@@ -12,6 +12,13 @@ internal sealed class WindowsFormsEventHandlerExtension : EventHandlerExtension<
 {
     private static readonly ConditionalWeakTable<Component, IDictionary<object, EventHandlerBase<Component, WindowsFormsEventHandlerItem>>> EventHandlerBaseRepository = new();
 
+    public WindowsFormsEventHandlerExtension()
+    {
+        Add<WindowsFormsEventHandlerParameterFromDIResolver>();
+        Add<WindowsFormsEventHandlerParameterFromElementResolver>();
+        Add<WindowsFormsEventHandlerParameterFromDataContextResolver>();
+    }
+
     protected override IDictionary<object, EventHandlerBase<Component, WindowsFormsEventHandlerItem>> EnsureEventHandlerBases(Component? element)
     {
         if (element is null) return new Dictionary<object, EventHandlerBase<Component, WindowsFormsEventHandlerItem>>();
@@ -30,11 +37,13 @@ internal sealed class WindowsFormsEventHandlerExtension : EventHandlerExtension<
         eventHandlers.Add(new WindowsFormsEventHandlerItem(
             eventHandlerAttribute.ElementName, targetElement,
             eventHandlerAttribute.Event, eventInfo,
-            handlerCreator(eventInfo?.EventHandlerType), eventHandlerAttribute.HandledEventsToo
+            handlerCreator(eventInfo?.EventHandlerType), eventHandlerAttribute.HandledEventsToo,
+            CreateParameterResolver(element)
         ));
     }
 
-    protected override EventHandlerAction CreateEventHandlerAction(MethodInfo method, object? target) => new WindowsFormsEventHandlerAction(method, target);
+    protected override EventHandlerAction CreateEventHandlerAction(MethodInfo method, object? target, Component? element)
+        => new WindowsFormsEventHandlerAction(method, target, CreateParameterDependencyResolver(CreateParameterResolver(element)));
 
     private EventInfo? RetrieveEventInfo(Component? element, string name)
         => element?.GetType().GetEvents().FirstOrDefault(e => e.Name == name);

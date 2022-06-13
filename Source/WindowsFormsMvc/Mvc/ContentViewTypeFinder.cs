@@ -46,8 +46,7 @@ public class ContentViewTypeFinder : IContentViewTypeFinder
                 ContentView = type.GetCustomAttribute<ContentViewAttribute>(true)
             })
             .Where(x => x.ContentView?.ContentType == contentType)
-            .OrderByDescending(x => x.ContentView!.Priority)
-            .FirstOrDefault()?.Type;
+            .MaxBy(x => x.ContentView!.Priority)?.Type;
 
     Type? IContentViewTypeFinder.Find(object content)
         => FindContentViewType(content);

@@ -8,6 +8,10 @@ namespace Charites.Windows.Mvc;
 
 internal sealed class WindowsFormsControlInjector : ElementInjector<Component>, IWindowsFormsControlInjector
 {
+    public WindowsFormsControlInjector(IElementFinder<Component> elementFinder) : base(elementFinder)
+    {
+    }
+
     protected override object? FindElement(Component? rootElement, string elementName)
         => rootElement.FindComponent(elementName);
 }

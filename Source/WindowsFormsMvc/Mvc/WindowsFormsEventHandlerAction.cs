@@ -8,12 +8,9 @@ namespace Charites.Windows.Mvc;
 
 internal sealed class WindowsFormsEventHandlerAction : EventHandlerAction
 {
-    public WindowsFormsEventHandlerAction(MethodInfo method, object? target) : base(method, target)
+    public WindowsFormsEventHandlerAction(MethodInfo method, object? target, IParameterDependencyResolver parameterDependencyResolver) : base(method, target, parameterDependencyResolver)
     {
     }
 
     protected override bool HandleUnhandledException(Exception exc) => WindowsFormsController.HandleUnhandledException(exc);
-
-    protected override IParameterDependencyResolver CreateParameterDependencyResolver(IDictionary<Type, Func<object?>>? dependencyResolver)
-        => dependencyResolver is null ? new WindowsFormsParameterDependencyResolver() : new WindowsFormsParameterDependencyResolver(dependencyResolver);
 }

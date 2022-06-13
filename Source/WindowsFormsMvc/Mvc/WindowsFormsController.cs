@@ -38,6 +38,20 @@ public class WindowsFormsController : Component
     public static IDataContextInjector DefaultDataContextInjector { get; set; } = new DataContextInjector();
 
     /// <summary>
+    /// Gets or sets the default finder to find a control in a view.
+    /// </summary>
+    public static IWindowsFormsControlFinder DefaultControlFinder
+    {
+        get => defaultControlFinder;
+        set
+        {
+            defaultControlFinder = value;
+            EnsureDefaultControlInjector();
+        }
+    }
+    private static IWindowsFormsControlFinder defaultControlFinder = new WindowsFormsControlFinder();
+
+    /// <summary>
     /// Gets or sets the default finder to find a key of a control.
     /// </summary>
     public static IWindowsFormsControlKeyFinder DefaultControlKeyFinder
@@ -54,7 +68,7 @@ public class WindowsFormsController : Component
     /// <summary>
     /// Gets or sets the default injector to inject a elements in a view to a controller.
     /// </summary>
-    public static IWindowsFormsControlInjector DefaultControlInjector { get; set; } = new WindowsFormsControlInjector();
+    public static IWindowsFormsControlInjector DefaultControlInjector { get; set; } = new WindowsFormsControlInjector(DefaultControlFinder);
 
     /// <summary>
     /// Gets or sets the default finder to find a type of a controller that controls a view.
@@ -93,6 +107,22 @@ public class WindowsFormsController : Component
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public IDataContextInjector DataContextInjector { get; set; } = DefaultDataContextInjector;
+
+    /// <summary>
+    /// Gets or set the finder to find a control in a view.
+    /// </summary>
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public IWindowsFormsControlFinder ControlFinder
+    {
+        get => controlFinder;
+        set
+        {
+            controlFinder = value;
+            EnsureControlInjector();
+        }
+    }
+    private IWindowsFormsControlFinder controlFinder = DefaultControlFinder;
 
     /// <summary>
     /// Gets or sets the finder to find a key of a control.
@@ -153,8 +183,6 @@ public class WindowsFormsController : Component
 
     static WindowsFormsController()
     {
-        EnsureDefaultControllerTypeFinder();
-
         Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => typeof(IWindowsFormsControllerExtension).IsAssignableFrom(t))
             .Where(t => t.IsClass && !t.IsAbstract)
@@ -163,6 +191,10 @@ public class WindowsFormsController : Component
             .ForEach(extension => AddExtension(extension!));
     }
 
+    private static void EnsureDefaultControlInjector()
+    {
+        DefaultControlInjector = new WindowsFormsControlInjector(DefaultControlFinder);
+    }
     private static void EnsureDefaultControllerTypeFinder()
     {
         DefaultControllerTypeFinder = new WindowsFormsControllerTypeFinder(DefaultControlKeyFinder, DefaultDataContextFinder);
@@ -173,7 +205,6 @@ public class WindowsFormsController : Component
     /// </summary>
     public WindowsFormsController()
     {
-        EnsureControllerTypeFinder();
     }
 
     /// <summary>
@@ -276,6 +307,11 @@ public class WindowsFormsController : Component
         Controllers?.Detach();
         Controllers = null;
     }
+
+    /// <summary>
+    /// Ensures the injector to inject controls in a view to a controller.
+    /// </summary>
+    protected void EnsureControlInjector() => ControlInjector = new WindowsFormsControlInjector(ControlFinder);
 
     /// <summary>
     /// Ensures the finder to find a type of a controller.

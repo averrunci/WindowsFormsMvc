@@ -31,7 +31,8 @@ public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Component>
     /// handler with the default condition that it will not be invoked if the event
     /// is already marked handled.
     /// </param>
-    public WindowsFormsEventHandlerItem(string elementName, Component? element, string eventName, EventInfo? eventInfo, Delegate? handler, bool handledEventsToo) : base(elementName, element, eventName, handler, handledEventsToo)
+    /// <param name="parameterResolver">The resolver to resolve parameters.</param>
+    public WindowsFormsEventHandlerItem(string elementName, Component? element, string eventName, EventInfo? eventInfo, Delegate? handler, bool handledEventsToo, IEnumerable<IEventHandlerParameterResolver> parameterResolver) : base(elementName, element, eventName, handler, handledEventsToo, parameterResolver)
     {
         this.eventInfo = eventInfo;
     }
@@ -60,15 +61,5 @@ public sealed class WindowsFormsEventHandlerItem : EventHandlerItem<Component>
     protected override void RemoveEventHandler(Component element, Delegate handler)
     {
         eventInfo?.RemoveMethod?.Invoke(element, new object[] { handler });
-    }
-
-    /// <summary>
-    /// Creates the resolver to resolver dependencies of parameters.
-    /// </summary>
-    /// <param name="dependencyResolver">The resolver to resolver dependencies of parameters.</param>
-    /// <returns>The resolver to resolver dependencies of parameters.</returns>
-    protected override IParameterDependencyResolver CreateParameterDependencyResolver(IDictionary<Type, Func<object?>>? dependencyResolver)
-    {
-        return dependencyResolver is null ? new ParameterDependencyResolver() : new WindowsFormsParameterDependencyResolver(dependencyResolver);
     }
 }

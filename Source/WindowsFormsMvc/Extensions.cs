@@ -68,4 +68,11 @@ internal static class Extensions
 
         dataContextSource.Value = dataContext;
     }
+
+    public static WindowsFormsController? FindWindowsFormsController(this Component? @this)
+        => @this?.GetType()
+            .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(field => typeof(WindowsFormsController).IsAssignableFrom(field.FieldType))
+            .Select(field => field.GetValue(@this) as WindowsFormsController)
+            .FirstOrDefault(windowsFormsController => windowsFormsController is not null);
 }
