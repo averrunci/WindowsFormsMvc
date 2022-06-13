@@ -3,7 +3,6 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <OutputType>Exe</OutputType>
     <RootNamespace>Charites.Windows</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>averrunci</Authors>
@@ -16,7 +15,7 @@
     <FileVersion>3.1.0</FileVersion>
     <Description>The specification class library for Windows Forms with Model View Controller.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Forms\TestItemView.cs">
@@ -27,7 +26,15 @@
     <ProjectReference Include="..\..\Source\WindowsFormsMvc\WindowsFormsMvc.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Carna" Version="2.1.0" />
+    <PackageReference Include="Carna" Version="2.1.0">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NSubstitute" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="Carna.AssemblyFixtureAttribute">
+      <RequiresSta>true</RequiresSta>
+      <RequiresSta_TypeName>System.Boolean</RequiresSta_TypeName>
+    </AssemblyAttribute>
   </ItemGroup>
 </Project>
