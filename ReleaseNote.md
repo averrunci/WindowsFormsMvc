@@ -1,5 +1,20 @@
 # Release note
 
+## v3.2.0
+
+### Add
+
+- Add the IWindowsFormsControlFinder interface that extends IElementFinder&lt;Component&gt; interface.
+- Add the DefaultControlFinder and ControlFinder property to the WindowsFormsController class.
+
+### Changes
+
+ - Change Charites version to 2.1.0.
+ - Change the WindowsFormsExtension so that event handlers that have parameters attributed by the following attribute can be injected.
+   - FromDIAttribute
+   - FromElementAttribute
+   - FromDataContextAttribute
+
 ## v3.1.0
 
 ### Add
