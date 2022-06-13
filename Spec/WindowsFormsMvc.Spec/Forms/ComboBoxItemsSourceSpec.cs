@@ -6,12 +6,11 @@ using Carna;
 
 namespace Charites.Windows.Forms;
 
-[Specification("ComboBoxItemsSource Spec")]
+[Specification(
+    "ComboBoxItemsSource Spec",
+    typeof(ComboBoxItemsSourceSpec_ValueNotSpecified),
+    typeof(ComboBoxItemsSourceSpec_ValueSpecified)
+)]
 class ComboBoxItemsSourceSpec
 {
-    [Context]
-    ComboBoxItemsSourceSpec_ValueNotSpecified ValueNotSpecified => default!;
-
-    [Context]
-    ComboBoxItemsSourceSpec_ValueSpecified ValueSpecified => default!;
 }

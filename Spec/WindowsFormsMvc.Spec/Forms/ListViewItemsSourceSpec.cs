@@ -4,18 +4,14 @@
 // of the MIT license.  See the LICENSE file for details.
 using Carna;
 
-namespace Charites.Windows.Forms
+namespace Charites.Windows.Forms;
+
+[Specification(
+    "ListViewItemsSource Spec",
+    typeof(ListViewItemsSourceSpec_ItemBound),
+    typeof(ListViewItemsSourceSpec_CheckedMemberSpecified),
+    typeof(ListViewItemsSourceSpec_CheckedSpecified)
+)]
+class ListViewItemsSourceSpec
 {
-    [Specification("ListViewItemsSource Spec")]
-    class ListViewItemsSourceSpec
-    {
-        [Context]
-        ListViewItemsSourceSpec_ItemBound ItemBound => default!;
-
-        [Context]
-        ListViewItemsSourceSpec_CheckedMemberSpecified CheckedMemberSpecified => default!;
-
-        [Context]
-        ListViewItemsSourceSpec_CheckedSpecified CheckedSpecified => default!;
-    }
 }

@@ -6,12 +6,11 @@ using Carna;
 
 namespace Charites.Windows.Forms;
 
-[Specification("ListItemToIndexConverter Spec")]
+[Specification(
+    "ListItemToIndexConverter Spec",
+    typeof(ListItemToIndexConverter_Convert),
+    typeof(ListItemToIndexConverter_ConvertBack)
+)]
 class ListItemToIndexConverter
 {
-    [Context]
-    ListItemToIndexConverter_Convert Convert => default!;
-
-    [Context]
-    ListItemToIndexConverter_ConvertBack ConvertBack => default!;
 }

@@ -4,24 +4,16 @@
 // of the MIT license.  See the LICENSE file for details.
 using Carna;
 
-namespace Charites.Windows.Forms
+namespace Charites.Windows.Forms;
+
+[Specification(
+    "ListViewItemContext Spec",
+    typeof(ListViewItemContextSpec_BindChecked),
+    typeof(ListViewItemContextSpec_BindText),
+    typeof(ListViewItemContextSpec_BindBackColor),
+    typeof(ListViewItemContextSpec_BindForeColor),
+    typeof(ListViewItemContextSpec_BindFont)
+)]
+class ListViewItemContextSpec
 {
-    [Specification("ListViewItemContext Spec")]
-    class ListViewItemContextSpec
-    {
-        [Context]
-        ListViewItemContextSpec_BindChecked BindChecked => default!;
-
-        [Context]
-        ListViewItemContextSpec_BindText BindText => default!;
-
-        [Context]
-        ListViewItemContextSpec_BindBackColor BindBackColor => default!;
-
-        [Context]
-        ListViewItemContextSpec_BindForeColor BindForeColor => default!;
-
-        [Context]
-        ListViewItemContextSpec_BindFont BindFont => default!;
-    }
 }

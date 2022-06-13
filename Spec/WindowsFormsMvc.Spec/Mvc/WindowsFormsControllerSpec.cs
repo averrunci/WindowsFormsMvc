@@ -4,24 +4,16 @@
 // of the MIT license.  See the LICENSE file for details.
 using Carna;
 
-namespace Charites.Windows.Mvc
+namespace Charites.Windows.Mvc;
+
+[Specification(
+    "WindowsFormsController Spec",
+    typeof(WindowsFormsControllerSpec_EventHandlerDataContextControlInjection),
+    typeof(WindowsFormsControllerSpec_AttachingAndDetachingController),
+    typeof(WindowsFormsControllerSpec_DataContextChanged),
+    typeof(WindowsFormsControllerSpec_WindowsFormsControllerExtension),
+    typeof(WindowsFormsControllerSpec_UnhandledException)
+)]
+class WindowsFormsControllerSpec
 {
-    [Specification("WindowsFormsController Spec")]
-    class WindowsFormsControllerSpec
-    {
-        [Context]
-        WindowsFormsControllerSpec_EventHandlerDataContextControlInjection EventHandlerDataContextControlInjection => default!;
-
-        [Context]
-        WindowsFormsControllerSpec_AttachingAndDetachingController AttachingAndDetachingController => default!;
-
-        [Context]
-        WindowsFormsControllerSpec_DataContextChanged DataContextChanged => default!;
-
-        [Context]
-        WindowsFormsControllerSpec_WindowsFormsControllerExtension WindowsFormsControllerExtension => default!;
-
-        [Context]
-        WindowsFormsControllerSpec_UnhandledException UnhandledException => default!;
-    }
 }

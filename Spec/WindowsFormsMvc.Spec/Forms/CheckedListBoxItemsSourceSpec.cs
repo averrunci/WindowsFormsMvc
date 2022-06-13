@@ -6,30 +6,17 @@ using Carna;
 
 namespace Charites.Windows.Forms;
 
-[Specification("CheckedListBoxItemsSource Spec")]
+[Specification(
+    "CheckedListBoxItemsSource Spec",
+    typeof(CheckedListBoxItemsSourceSpec_ValueNotSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_ValueMemberSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_BooleanCheckedMemberSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_NullableBooleanCheckedMemberSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_CheckStateMemberSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_ValueAndBooleanCheckedSelectorSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_ValueAndNullableBooleanCheckedSelectorSpecified),
+    typeof(CheckedListBoxItemsSourceSpec_ValueAndCheckStateSelectorSpecified)
+)]
 class CheckedListBoxItemsSourceSpec
 {
-    [Context]
-    CheckedListBoxItemsSourceSpec_ValueNotSpecified ValueNotSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_ValueMemberSpecified ValueMemberSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_BooleanCheckedMemberSpecified BooleanCheckedMemberSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_NullableBooleanCheckedMemberSpecified NullableBooleanCheckedMemberSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_CheckStateMemberSpecified CheckStateMemberSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_ValueAndBooleanCheckedSelectorSpecified ValueAndBooleanCheckedSelectorSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_ValueAndNullableBooleanCheckedSelectorSpecified ValueAndNullableBooleanCheckedSelectorSpecified => default!;
-
-    [Context]
-    CheckedListBoxItemsSourceSpec_ValueAndCheckStateSelectorSpecified ValueAndCheckStateSelectorSpecified => default!;
 }

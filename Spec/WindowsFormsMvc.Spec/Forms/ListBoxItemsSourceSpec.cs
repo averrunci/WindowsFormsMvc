@@ -4,15 +4,13 @@
 // of the MIT license.  See the LICENSE file for details.
 using Carna;
 
-namespace Charites.Windows.Forms
-{
-    [Specification("ListBoxItemsSource Spec")]
-    class ListBoxItemsSourceSpec
-    {
-        [Context]
-        ListBoxItemsSourceSpec_ValueNotSpecified ValueNotSpecified => default!;
+namespace Charites.Windows.Forms;
 
-        [Context]
-        ListBoxItemsSourceSpec_ValueSpecified ValueSpecified => default!;
-    }
+[Specification(
+    "ListBoxItemsSource Spec",
+    typeof(ListBoxItemsSourceSpec_ValueNotSpecified),
+    typeof(ListBoxItemsSourceSpec_ValueSpecified)
+)]
+class ListBoxItemsSourceSpec
+{
 }

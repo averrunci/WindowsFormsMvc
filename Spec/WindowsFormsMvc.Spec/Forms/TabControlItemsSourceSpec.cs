@@ -4,18 +4,14 @@
 // of the MIT license.  See the LICENSE file for details.
 using Carna;
 
-namespace Charites.Windows.Forms
+namespace Charites.Windows.Forms;
+
+[Specification(
+    "TabControlItemsSource Spec",
+    typeof(TabControlItemsSourceSpec_HeaderNotSpecified),
+    typeof(TabControlItemsSourceSpec_HeaderMemberSpecified),
+    typeof(TabControlItemsSourceSpec_HeaderSpecified)
+)]
+class TabControlItemsSourceSpec
 {
-    [Specification("TabControlItemsSource Spec")]
-    class TabControlItemsSourceSpec
-    {
-        [Context]
-        TabControlItemsSourceSpec_HeaderNotSpecified HeaderNotSpecified => default!;
-
-        [Context]
-        TabControlItemsSourceSpec_HeaderMemberSpecified HeaderMemberSpecified => default!;
-
-        [Context]
-        TabControlItemsSourceSpec_HeaderSpecified HeaderSpecified => default!;
-    }
 }
