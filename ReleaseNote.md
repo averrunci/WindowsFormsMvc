@@ -10,7 +10,7 @@
 ### Changes
 
  - Change Charites version to 2.1.0.
- - Change the WindowsFormsExtension so that event handlers that have parameters attributed by the following attribute can be injected.
+ - Change the WindowsFormsEventHandlerExtension so that event handlers that have parameters attributed by the following attribute can be injected.
    - FromDIAttribute
    - FromElementAttribute
    - FromDataContextAttribute

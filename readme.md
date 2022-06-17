@@ -286,17 +286,17 @@ This attribute is specified to the parameter. Its parameter value is injected fr
 to which the controller is attached.
 
 ``` csharp
-private void ActionButton_Click([DataContext] DataContextType dataContext)
+private void ActionButton_Click([FromDataContext] DataContextType dataContext)
 {
     // implements the action.
 }
 
-private void ActionButton_Click(EventArgs e, [DataContext] DataContextType dataContext)
+private void ActionButton_Click(EventArgs e, [FromDataContext] DataContextType dataContext)
 {
     // implements the action.
 }
 
-private void ActionButton_Click(object? sender, EventArgs e, [DataContext] DataContextType dataContext)
+private void ActionButton_Click(object? sender, EventArgs e, [FromDataContext] DataContextType dataContext)
 {
     // implements the action.
 }
