@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Charites.Windows.Samples.SimpleLoginDemo.Presentation</RootNamespace>
+    <RootNamespace>Charites.Windows.Samples.SimpleLoginDemo.Core</RootNamespace>
     <Version>3.2.0</Version>
     <Copyright>Copyright (C) 2022 Fievus</Copyright>
     <AssemblyVersion>3.2.0</AssemblyVersion>

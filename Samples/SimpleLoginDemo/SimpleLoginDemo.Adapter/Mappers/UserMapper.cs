@@ -2,14 +2,13 @@
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
-using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Features.Users;
 using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo.Adapter.Mappers;
 
 internal static class UserMapper
 {
-    public static User ToUser(this LoginContent @this)
+    public static Core.Features.Users.User ToUser(this LoginContent @this)
         => new()
         {
             UserId = @this.UserId.Value,

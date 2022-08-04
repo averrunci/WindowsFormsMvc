@@ -2,18 +2,17 @@
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
-using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Features.Users;
 using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
 
 namespace Charites.Windows.Samples.SimpleLoginDemo.Adapter.Mappers;
 
 internal static class UserAuthenticationResultMapper
 {
-    public static LoginAuthenticationResult ToLoginAuthenticationResult(this UserAuthenticationResult @this)
+    public static LoginAuthenticationResult ToLoginAuthenticationResult(this Core.Features.Users.UserAuthenticationResult @this)
         => @this switch
         {
-            UserAuthenticationResult.Success => LoginAuthenticationResult.Succeeded(),
-            UserAuthenticationResult.Failure => LoginAuthenticationResult.Failed(),
+            Core.Features.Users.UserAuthenticationResult.Success => LoginAuthenticationResult.Succeeded(),
+            Core.Features.Users.UserAuthenticationResult.Failure => LoginAuthenticationResult.Failed(),
             _ => throw new InvalidOperationException()
         };
 }
