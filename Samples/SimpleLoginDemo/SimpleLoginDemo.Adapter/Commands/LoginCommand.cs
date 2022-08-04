@@ -22,6 +22,6 @@ public class LoginCommand : ILoginCommand
         return UserAuthentication.Authenticate(loginContent.ToUser()).ToLoginAuthenticationResult();
     }
 
-    Task<LoginAuthenticationResult> ILoginCommand.Authenticate(LoginContent loginContent)
+    Task<LoginAuthenticationResult> ILoginCommand.AuthenticateAsync(LoginContent loginContent)
         => Task.Run(() => Authenticate(loginContent));
 }

@@ -30,7 +30,7 @@ public class LoginController
 
         if (!loginContent.IsValid) return;
 
-        var result = await command.Authenticate(loginContent);
+        var result = await command.AuthenticateAsync(loginContent);
         if (result.Success)
         {
             navigator.NavigateTo(new HomeContent(loginContent.UserId.Value));

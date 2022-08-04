@@ -6,5 +6,5 @@ namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
 
 public interface ILoginCommand
 {
-    Task<LoginAuthenticationResult> Authenticate(LoginContent loginContent);
+    Task<LoginAuthenticationResult> AuthenticateAsync(LoginContent loginContent);
 }

@@ -28,7 +28,7 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
             LoginContent.UserId.Value = "user";
             LoginContent.Password.Value = "password";
 
-            LoginCommand.Authenticate(LoginContent)
+            LoginCommand.AuthenticateAsync(LoginContent)
                 .Returns(Task.FromResult(LoginAuthenticationResult.Succeeded()));
         });
         When("the login button is clicked", async () =>
@@ -62,7 +62,7 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
                 .RaiseAsync(nameof(Control.Click))
         );
         Then("the authentication should not be executed", () =>
-            LoginCommand.DidNotReceive().Authenticate(Arg.Any<LoginContent>()));
+            LoginCommand.DidNotReceive().AuthenticateAsync(Arg.Any<LoginContent>()));
         Then("the content should not be navigated to any contents.", () =>
         {
             Navigator.DidNotReceive().NavigateTo(Arg.Any<object>());
@@ -77,7 +77,7 @@ class LoginControllerSpec_LoginButtonClick : FixtureSteppable
             LoginContent.UserId.Value = "user";
             LoginContent.Password.Value = "password";
 
-            LoginCommand.Authenticate(LoginContent)
+            LoginCommand.AuthenticateAsync(LoginContent)
                 .Returns(LoginAuthenticationResult.Failed());
         });
         When("the login button is clicked", async () =>
