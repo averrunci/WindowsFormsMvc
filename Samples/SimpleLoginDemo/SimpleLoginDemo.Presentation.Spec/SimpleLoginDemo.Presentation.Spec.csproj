@@ -6,9 +6,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Charites.Windows.Samples.SimpleLoginDemo.Presentation</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>3.2.0</Version>
-    <FileVersion>3.2.0</FileVersion>
-    <AssemblyVersion>3.2.0</AssemblyVersion>
+    <Version>3.3.0</Version>
+    <FileVersion>3.3.0</FileVersion>
+    <AssemblyVersion>3.3.0</AssemblyVersion>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (C) 2022 Fievus</Copyright>
@@ -23,7 +23,7 @@
     <PackageReference Include="Carna" Version="2.1.0">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NSubstitute" Version="4.3.0" />
+    <PackageReference Include="NSubstitute" Version="4.4.0" />
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="Carna.AssemblyFixtureAttribute">

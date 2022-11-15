@@ -8,12 +8,9 @@ using Charites.Windows.Samples.SimpleLoginDemo.Presentation.Login;
 namespace Charites.Windows.Samples.SimpleLoginDemo.Presentation;
 
 [View(Key = nameof(ApplicationHost))]
-public class ApplicationHostController : IDisposable
+public class ApplicationHostController : ControllerBase<ApplicationHost>, IDisposable
 {
     private readonly IContentNavigator navigator;
-
-    [DataContext]
-    private readonly ApplicationHost? host = null;
 
     public ApplicationHostController(IContentNavigator navigator)
     {
@@ -36,11 +33,14 @@ public class ApplicationHostController : IDisposable
         navigator.Navigated -= OnContentNavigated;
     }
 
+    private void Navigate(ApplicationHost host, object content)
+    {
+        host.Content.Value = content;
+    }
+
     private void OnContentNavigated(object? sender, ContentNavigatedEventArgs e)
     {
-        if (host is null) return;
-
-        host.Content.Value = e.Content;
+        DataContext.IfPresent(e.Content, Navigate);
     }
 
     private void ApplicationHostView_Load()

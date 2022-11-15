@@ -32,7 +32,7 @@ public partial class LoginView : UserControl
 
     private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
     {
-        if (e.OldValue is LoginContent oldContent) UnbindContent(oldContent);
-        if (e.NewValue is LoginContent newContent) BindContent(newContent);
+        (e.OldValue as LoginContent).IfPresent(UnbindContent);
+        (e.NewValue as LoginContent).IfPresent(BindContent);
     }
 }

@@ -26,7 +26,7 @@ public partial class HomeView : UserControl
 
     private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
     {
-        if (e.OldValue is HomeContent oldContent) UnbindContent(oldContent);
-        if (e.NewValue is HomeContent newContent) BindContent(newContent);
+        (e.OldValue as HomeContent).IfPresent(UnbindContent);
+        (e.NewValue as HomeContent).IfPresent(BindContent);
     }
 }

@@ -29,7 +29,7 @@ public partial class ApplicationHostView : UserControl
 
     private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
     {
-        if (e.OldValue is ApplicationHost oldContent) UnbindContent(oldContent);
-        if (e.NewValue is ApplicationHost newContent) BindContent(newContent);
+        (e.OldValue as ApplicationHost).IfPresent(UnbindContent);
+        (e.NewValue as ApplicationHost).IfPresent(BindContent);
     }
 }
