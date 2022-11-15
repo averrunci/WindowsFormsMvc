@@ -40,7 +40,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Charites" Version="2.1.0" />
+    <PackageReference Include="Charites" Version="2.2.0" />
     <PackageReference Include="Charites.Bindings" Version="2.2.0" />
   </ItemGroup>
 </Project>
