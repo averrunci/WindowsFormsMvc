@@ -108,8 +108,8 @@ public class LoginView : UserControl
 
     private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
     {
-        if (e.OldValue is LoginContent as oldContent) UnbindContent(oldContent);
-        if (e.NewValue is LoginContent as newContent) BindContent(newContent);
+        if (e.OldValue is LoginContent oldContent) UnbindContent(oldContent);
+        if (e.NewValue is LoginContent newContent) BindContent(newContent);
     }
 }
 ```

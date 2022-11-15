@@ -1,5 +1,12 @@
 # Release note
 
+## v3.3.0
+
+## Changes
+
+- Change Charites version to 2.2.0.
+- Change Charites.Bindings version to 2.2.0.
+
 ## v3.2.0
 
 ### Add

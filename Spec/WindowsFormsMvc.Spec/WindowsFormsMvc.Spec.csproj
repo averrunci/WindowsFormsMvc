@@ -7,12 +7,12 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>averrunci</Authors>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
-    <Version>3.2.0</Version>
+    <Version>3.3.0</Version>
     <Copyright>Copyright (C) 2022 Fievus</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseFile></PackageLicenseFile>
-    <AssemblyVersion>3.2.0</AssemblyVersion>
-    <FileVersion>3.2.0</FileVersion>
+    <AssemblyVersion>3.3.0</AssemblyVersion>
+    <FileVersion>3.3.0</FileVersion>
     <Description>The specification class library for Windows Forms with Model View Controller.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
