@@ -1,6 +1,6 @@
 {
   "assemblies": [
-    "WindowsFormsMvc.Spec\\bin\\Debug\\net6.0-windows\\WindowsFormsMvc.Spec.dll"
+    "WindowsFormsMvc.Spec\\bin\\Debug\\net8.0-windows\\WindowsFormsMvc.Spec.dll"
   ],
   "reporters": [
     {
