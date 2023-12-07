@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -43,7 +43,9 @@ internal sealed class ObservablePropertyBinding<TSource, TTarget> : IObservableP
 
     public void Bind()
     {
-        if (bound || controlPropertyDescriptor is null) return;
+        if (controlPropertyDescriptor is null) return;
+
+        if (bound) Unbind();
 
         observableProperty.PropertyValueChanged += OnObservablePropertyValueChanged;
         SetValueToControl(observableProperty.Value);
@@ -55,7 +57,9 @@ internal sealed class ObservablePropertyBinding<TSource, TTarget> : IObservableP
     {
         if (converter is not null && backConverter is null) throw new InvalidOperationException("When the converter is specified, the back converter must be specified.");
         if (converter is null && backConverter is not null) throw new InvalidOperationException("When the back converter is specified, the converter must be specified.");
-        if (bound || controlPropertyDescriptor is null) return;
+        if (controlPropertyDescriptor is null) return;
+
+        if (bound) Unbind();
 
         observableProperty.PropertyValueChanged += OnObservablePropertyValueChanged;
         controlPropertyDescriptor.AddValueChanged(control, OnControlPropertyValueChanged);
@@ -66,7 +70,9 @@ internal sealed class ObservablePropertyBinding<TSource, TTarget> : IObservableP
 
     public void BindToSource()
     {
-        if (bound || controlPropertyDescriptor is null) return;
+        if (controlPropertyDescriptor is null) return;
+
+        if (bound) Unbind();
 
         controlPropertyDescriptor.AddValueChanged(control, OnControlPropertyValueChanged);
         SetValueToObservableProperty(controlPropertyDescriptor.GetValue(control));
