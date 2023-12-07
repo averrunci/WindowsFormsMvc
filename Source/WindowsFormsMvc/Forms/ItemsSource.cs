@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -40,12 +40,9 @@ public abstract class ItemsSource<TControl, TItem> where TControl : Control
     /// Binds the specified items.
     /// </summary>
     /// <param name="items">The items to be bound.</param>
-    /// <exception cref="InvalidOperationException">
-    /// This control has already bound another items.
-    /// </exception>
     public void Bind(IEnumerable items)
     {
-        if (IsItemBound) throw new InvalidOperationException("This control has already bound another items.");
+        if (IsItemBound) Unbind();
 
         this.items = items;
         if (this.items is INotifyCollectionChanged notifyCollectionChanged) notifyCollectionChanged.CollectionChanged += OnItemCollectionChanged;
