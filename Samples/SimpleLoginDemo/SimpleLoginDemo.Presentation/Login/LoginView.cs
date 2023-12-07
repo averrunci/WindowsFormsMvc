@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -25,14 +25,14 @@ public partial class LoginView : UserControl
         observablePropertyBindings.Bind(loginContent.Message, messageLabel, nameof(messageLabel.Text));
     }
 
-    private void UnbindContent(LoginContent loginContent)
+    private void UnbindContent()
     {
         observablePropertyBindings.Unbind();
     }
 
-    private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
+    private void LoginView_DataContextChanged(object? sender, EventArgs e)
     {
-        (e.OldValue as LoginContent).IfPresent(UnbindContent);
-        (e.NewValue as LoginContent).IfPresent(BindContent);
+        UnbindContent();
+        (DataContext as LoginContent).IfPresent(BindContent);
     }
 }

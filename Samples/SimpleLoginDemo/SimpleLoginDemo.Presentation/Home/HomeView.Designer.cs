@@ -28,52 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeView));
-            this.commandPanel = new System.Windows.Forms.Panel();
-            this.messageLabel = new System.Windows.Forms.Label();
-            this.logoutButton = new System.Windows.Forms.Button();
-            this.dataContextSource = new Charites.Windows.Mvc.DataContextSource(this.components);
-            this.windowsFormsController = new Charites.Windows.Mvc.WindowsFormsController(this.components);
-            this.commandPanel.SuspendLayout();
-            this.SuspendLayout();
+            commandPanel = new Panel();
+            logoutButton = new Button();
+            messageLabel = new Label();
+            windowsFormsController = new Mvc.WindowsFormsController(components);
+            commandPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // commandPanel
             // 
-            this.commandPanel.Controls.Add(this.logoutButton);
-            resources.ApplyResources(this.commandPanel, "commandPanel");
-            this.commandPanel.Name = "commandPanel";
-            // 
-            // messageLabel
-            // 
-            resources.ApplyResources(this.messageLabel, "messageLabel");
-            this.messageLabel.Name = "messageLabel";
+            commandPanel.Controls.Add(logoutButton);
+            resources.ApplyResources(commandPanel, "commandPanel");
+            commandPanel.Name = "commandPanel";
             // 
             // logoutButton
             // 
-            resources.ApplyResources(this.logoutButton, "logoutButton");
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.UseVisualStyleBackColor = true;
+            resources.ApplyResources(logoutButton, "logoutButton");
+            logoutButton.Name = "logoutButton";
+            logoutButton.UseVisualStyleBackColor = true;
             // 
-            // dataContextSource
+            // messageLabel
             // 
-            this.dataContextSource.DataContextChanged += new Charites.Windows.Mvc.DataContextChangedEventHandler(this.dataContextSource_DataContextChanged);
+            resources.ApplyResources(messageLabel, "messageLabel");
+            messageLabel.Name = "messageLabel";
             // 
             // windowsFormsController
             // 
-            this.windowsFormsController.View = this;
+            windowsFormsController.View = this;
             // 
             // HomeView
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.messageLabel);
-            this.Controls.Add(this.commandPanel);
-            this.DoubleBuffered = true;
-            this.Name = "HomeView";
-            this.commandPanel.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.Dpi;
+            Controls.Add(messageLabel);
+            Controls.Add(commandPanel);
+            DoubleBuffered = true;
+            Name = "HomeView";
+            DataContextChanged += HomeView_DataContextChanged;
+            commandPanel.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -81,7 +76,6 @@
         private System.Windows.Forms.Panel commandPanel;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Label messageLabel;
-        private Mvc.DataContextSource dataContextSource;
         private Mvc.WindowsFormsController windowsFormsController;
     }
 }

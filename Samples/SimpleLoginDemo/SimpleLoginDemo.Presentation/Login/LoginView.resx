@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+  <!--
     Microsoft ResX Schema 
-    
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -118,28 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="loginPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 127</value>
-  </data>
-  <data name="loginPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>437, 255</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="loginPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;loginPanel.Name" xml:space="preserve">
-    <value>loginPanel</value>
-  </data>
-  <data name="&gt;&gt;loginPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;loginPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;loginPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="loginButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>291, 197</value>
   </data>
@@ -150,6 +128,7 @@
   <data name="loginButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 48</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="loginButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -160,7 +139,7 @@
     <value>loginButton</value>
   </data>
   <data name="&gt;&gt;loginButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;loginButton.Parent" xml:space="preserve">
     <value>loginPanel</value>
@@ -168,6 +147,7 @@
   <data name="&gt;&gt;loginButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="passwordTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -190,7 +170,7 @@
     <value>passwordTextBox</value>
   </data>
   <data name="&gt;&gt;passwordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;passwordTextBox.Parent" xml:space="preserve">
     <value>loginPanel</value>
@@ -208,7 +188,7 @@
     <value>8, 8, 8, 0</value>
   </data>
   <data name="passwordHeaderLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 32</value>
+    <value>112, 32</value>
   </data>
   <data name="passwordHeaderLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -220,7 +200,7 @@
     <value>passwordHeaderLabel</value>
   </data>
   <data name="&gt;&gt;passwordHeaderLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;passwordHeaderLabel.Parent" xml:space="preserve">
     <value>loginPanel</value>
@@ -247,7 +227,7 @@
     <value>userIdTextBox</value>
   </data>
   <data name="&gt;&gt;userIdTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;userIdTextBox.Parent" xml:space="preserve">
     <value>loginPanel</value>
@@ -265,7 +245,7 @@
     <value>8, 8, 8, 0</value>
   </data>
   <data name="userIdHeaderLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 32</value>
+    <value>91, 32</value>
   </data>
   <data name="userIdHeaderLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -277,7 +257,7 @@
     <value>userIdHeaderLabel</value>
   </data>
   <data name="&gt;&gt;userIdHeaderLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;userIdHeaderLabel.Parent" xml:space="preserve">
     <value>loginPanel</value>
@@ -285,9 +265,27 @@
   <data name="&gt;&gt;userIdHeaderLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="dataContextSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="loginPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>178, 127</value>
+  </data>
+  <data name="loginPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>437, 255</value>
+  </data>
+  <data name="loginPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;loginPanel.Name" xml:space="preserve">
+    <value>loginPanel</value>
+  </data>
+  <data name="&gt;&gt;loginPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;loginPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;loginPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="windowsFormsController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>226, 17</value>
   </metadata>
@@ -322,7 +320,7 @@
     <value>messageLabel</value>
   </data>
   <data name="&gt;&gt;messageLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;messageLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -336,22 +334,16 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 600</value>
   </data>
-  <data name="&gt;&gt;dataContextSource.Name" xml:space="preserve">
-    <value>dataContextSource</value>
-  </data>
-  <data name="&gt;&gt;dataContextSource.Type" xml:space="preserve">
-    <value>Charites.Windows.Mvc.DataContextSource, WindowsFormsMvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;windowsFormsController.Name" xml:space="preserve">
     <value>windowsFormsController</value>
   </data>
   <data name="&gt;&gt;windowsFormsController.Type" xml:space="preserve">
-    <value>Charites.Windows.Mvc.WindowsFormsController, WindowsFormsMvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Charites.Windows.Mvc.WindowsFormsController, WindowsFormsMvc, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LoginView</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

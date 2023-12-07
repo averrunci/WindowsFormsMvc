@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -15,20 +15,20 @@ public class ApplicationHostController : ControllerBase<ApplicationHost>, IDispo
     public ApplicationHostController(IContentNavigator navigator)
     {
         this.navigator = navigator;
-        SubscribeContentNavigatorEvent();
+        SubscribeToContentNavigatorEvent();
     }
 
     public void Dispose()
     {
-        UnsubscribeContentNavigatorEvent();
+        UnsubscribeFromContentNavigatorEvent();
     }
 
-    private void SubscribeContentNavigatorEvent()
+    private void SubscribeToContentNavigatorEvent()
     {
         navigator.Navigated += OnContentNavigated;
     }
 
-    private void UnsubscribeContentNavigatorEvent()
+    private void UnsubscribeFromContentNavigatorEvent()
     {
         navigator.Navigated -= OnContentNavigated;
     }

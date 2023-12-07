@@ -28,54 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicationHostView));
-            this.titleLabel = new System.Windows.Forms.Label();
-            this.footerLabel = new System.Windows.Forms.Label();
-            this.contentControl = new Charites.Windows.Forms.ContentControl();
-            this.dataContextSource = new Charites.Windows.Mvc.DataContextSource(this.components);
-            this.windowsFormsController = new Charites.Windows.Mvc.WindowsFormsController(this.components);
-            this.SuspendLayout();
+            titleLabel = new Label();
+            footerLabel = new Label();
+            contentControl = new Forms.ContentControl();
+            windowsFormsController = new Mvc.WindowsFormsController(components);
+            SuspendLayout();
             // 
             // titleLabel
             // 
-            this.titleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            resources.ApplyResources(this.titleLabel, "titleLabel");
-            this.titleLabel.ForeColor = System.Drawing.Color.White;
-            this.titleLabel.Name = "titleLabel";
+            titleLabel.BackColor = Color.FromArgb(51, 51, 51);
+            resources.ApplyResources(titleLabel, "titleLabel");
+            titleLabel.ForeColor = Color.White;
+            titleLabel.Name = "titleLabel";
             // 
             // footerLabel
             // 
-            this.footerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            resources.ApplyResources(this.footerLabel, "footerLabel");
-            this.footerLabel.ForeColor = System.Drawing.Color.White;
-            this.footerLabel.Name = "footerLabel";
+            footerLabel.BackColor = Color.FromArgb(51, 51, 51);
+            resources.ApplyResources(footerLabel, "footerLabel");
+            footerLabel.ForeColor = Color.White;
+            footerLabel.Name = "footerLabel";
             // 
             // contentControl
             // 
-            resources.ApplyResources(this.contentControl, "contentControl");
-            this.contentControl.Name = "contentControl";
-            // 
-            // dataContextSource
-            // 
-            this.dataContextSource.DataContextChanged += new Charites.Windows.Mvc.DataContextChangedEventHandler(this.dataContextSource_DataContextChanged);
+            resources.ApplyResources(contentControl, "contentControl");
+            contentControl.Name = "contentControl";
+            contentControl.TabStop = true;
             // 
             // windowsFormsController
             // 
-            this.windowsFormsController.View = this;
+            windowsFormsController.View = this;
             // 
             // ApplicationHostView
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.Controls.Add(this.contentControl);
-            this.Controls.Add(this.footerLabel);
-            this.Controls.Add(this.titleLabel);
-            this.DoubleBuffered = true;
-            this.Name = "ApplicationHostView";
-            this.ResumeLayout(false);
-
+            AutoScaleMode = AutoScaleMode.Dpi;
+            BackColor = Color.FromArgb(204, 204, 204);
+            Controls.Add(contentControl);
+            Controls.Add(footerLabel);
+            Controls.Add(titleLabel);
+            DoubleBuffered = true;
+            Name = "ApplicationHostView";
+            DataContextChanged += ApplicationHostView_DataContextChanged;
+            ResumeLayout(false);
         }
 
         #endregion
@@ -83,7 +79,6 @@
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Label footerLabel;
         private Forms.ContentControl contentControl;
-        private Mvc.DataContextSource dataContextSource;
         private Mvc.WindowsFormsController windowsFormsController;
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -22,14 +22,14 @@ public partial class ApplicationHostView : UserControl
         observablePropertyBindings.Bind(host.Content, contentControl, nameof(contentControl.Content));
     }
 
-    private void UnbindContent(ApplicationHost host)
+    private void UnbindContent()
     {
         observablePropertyBindings.Unbind();
     }
 
-    private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
+    private void ApplicationHostView_DataContextChanged(object? sender, EventArgs e)
     {
-        (e.OldValue as ApplicationHost).IfPresent(UnbindContent);
-        (e.NewValue as ApplicationHost).IfPresent(BindContent);
+        UnbindContent();
+        (DataContext as ApplicationHost).IfPresent(BindContent);
     }
 }
