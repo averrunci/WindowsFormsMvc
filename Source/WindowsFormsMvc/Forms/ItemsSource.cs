@@ -55,12 +55,9 @@ public abstract class ItemsSource<TControl, TItem> where TControl : Control
     /// <summary>
     /// Unbinds the bound items.
     /// </summary>
-    /// <exception cref="InvalidOperationException">
-    /// This control has not bound any items yet.
-    /// </exception>
     public void Unbind()
     {
-        if (!IsItemBound || items is null) throw new InvalidOperationException("This control has not bound any items yet.");
+        if (!IsItemBound || items is null) return;
 
         if (items is INotifyCollectionChanged notifyCollectionChanged) notifyCollectionChanged.CollectionChanged -= OnItemCollectionChanged;
 
