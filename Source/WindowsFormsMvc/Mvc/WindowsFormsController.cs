@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -282,7 +282,7 @@ public class WindowsFormsController : Component
 
         if (DataContextFinder.Find(view) is null)
         {
-            view.AddDataContextChangedHandler(OnControlDataContextChanged, DataContextFinder);
+            view.AddDataContextChangedHandler(OnControlDataContextChanged, OnControlDataContextChanged, DataContextFinder);
             return;
         }
 
@@ -302,7 +302,7 @@ public class WindowsFormsController : Component
         if (DesignMode) return;
         if (view is null) return;
 
-        view.RemoveDataContextChangedHandler(OnControlDataContextChanged, DataContextFinder);
+        view.RemoveDataContextChangedHandler(OnControlDataContextChanged, OnControlDataContextChanged, DataContextFinder);
 
         Controllers?.Detach();
         Controllers = null;
@@ -341,9 +341,11 @@ public class WindowsFormsController : Component
         return Controllers;
     }
 
-    private void OnControlDataContextChanged(object? sender, DataContextChangedEventArgs e)
+    private void OnControlDataContextChanged(object? sender, EventArgs e) => HandleControlDataContextChanged(e);
+    private void OnControlDataContextChanged(object? sender, DataContextChangedEventArgs e) => HandleControlDataContextChanged(e);
+    private void HandleControlDataContextChanged(EventArgs e)
     {
-        view?.RemoveDataContextChangedHandler(OnControlDataContextChanged, DataContextFinder);
+        view?.RemoveDataContextChangedHandler(OnControlDataContextChanged, OnControlDataContextChanged, DataContextFinder);
 
         AttachControllersTo(view);
 

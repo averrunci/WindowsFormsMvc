@@ -1,7 +1,8 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
+using System.Collections;
 using Carna;
 
 namespace Charites.Windows.Mvc;
@@ -14,15 +15,31 @@ class WindowsFormsControllerSpec_DataContextChanged : FixtureSteppable
     object DataContext { get; } = new TestDataContexts.AttachingTestDataContext();
     object AnotherDataContext { get; } = new();
 
-    TestControls.AttachingTestControl View { get; set; } = default!;
-
-    [Example("Changes the data context")]
-    void Ex01()
+    [Example("Changes the data context when the view has the DataContextSource")]
+    [Sample(Source = typeof(WindowsFormsControllerDataContextChangedSampleDataSource))]
+    void Ex01(Control view)
     {
-        Given("a view that contains the data context", () => View = new TestControls.AttachingTestControl { DataContext = DataContext });
-        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = View);
+        Given("a view that contains the data context", () => view.DataContext = DataContext );
+        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = view);
         Then("the data context of the controller should be set", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDataContextController>().DataContext == DataContext);
-        When("another data context is set for the view", () => View.DataContext = AnotherDataContext);
+        When("another data context is set for the view", () => view.DataContext = AnotherDataContext);
         Then("the data context of the controller should be changed", () => WindowsFormsController.GetController<TestWindowsFormsControllers.TestDataContextController>().DataContext == AnotherDataContext);
+    }
+
+    class WindowsFormsControllerDataContextChangedSampleDataSource : ISampleDataSource
+    {
+        IEnumerable ISampleDataSource.GetData()
+        {
+            yield return new
+            {
+                Description = "When the view has the DataContextSource",
+                View = new TestControls.AttachingTestControl()
+            };
+            yield return new
+            {
+                Description = "When the view does not have the DataContextSource",
+                View = new TestControls.AttachingTestControlWithoutDataContextSource()
+            };
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -13,6 +13,7 @@ class ContentControlSpec : FixtureSteppable
     ContentControl ContentControl { get; } = new();
 
     TestDataContexts.TestContent Content { get; } = new();
+    TestDataContexts.TestContentWithoutDataContextSource ContentWithoutDataContextSource { get; } = new();
     TestDataContexts.DerivedTestContent DerivedContent { get; } = new();
     TestDataContexts.EmptyContent EmptyContent { get; } = new();
 
@@ -71,6 +72,37 @@ class ContentControlSpec : FixtureSteppable
         );
         Then("the data context of the content view should be set", () =>
             ContentControl.Controls.OfType<TestControls.TestControl>().First().DataContext == Content
+        );
+    }
+
+    [Example("When the view type is not specified and the view does not have the DataContextSource")]
+    void Ex03()
+    {
+        When("the content is set to the content control", () => ContentControl.Content = ContentWithoutDataContextSource);
+        Then("the content view should be set to the content control", () =>
+            ContentControl.Controls.Count == 1 &&
+            ContentControl.Controls[0].GetType() == typeof(TestControls.TestContentViewWithoutDataContextSource) &&
+            ContentControl.Controls[0].Dock == DockStyle.Fill
+        );
+        Then("the data context of the content view should be set", () =>
+            ContentControl.Controls.OfType<TestControls.TestControlWithoutDataContextSource>().First().DataContext == ContentWithoutDataContextSource
+        );
+    }
+
+    [Example("When the view type is specified and the view does not have the DataContextSource")]
+    void Ex04()
+    {
+        When("the view type is set to the content control", () => ContentControl.ViewType = typeof(TestControls.TestControlWithoutDataContextSource));
+        Then("the controls of the content control should not be set", () => ContentControl.Controls.Count == 0);
+
+        When("the content is set to the content control", () => ContentControl.Content = ContentWithoutDataContextSource);
+        Then("the content view whose type is the specified view type should be set to the content control", () =>
+            ContentControl.Controls.Count == 1 &&
+            ContentControl.Controls[0].GetType() == typeof(TestControls.TestControlWithoutDataContextSource) &&
+            ContentControl.Controls[0].Dock == DockStyle.Fill
+        );
+        Then("the data context of the content view should be set", () =>
+            ContentControl.Controls.OfType<TestControls.TestControlWithoutDataContextSource>().First().DataContext == ContentWithoutDataContextSource
         );
     }
 }

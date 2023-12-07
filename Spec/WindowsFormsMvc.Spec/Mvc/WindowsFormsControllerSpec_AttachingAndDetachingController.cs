@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -16,12 +16,12 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
     object DataContext { get; set; } = default!;
     TestControls.TestControl View { get; set; } = default!;
 
-    [Example("Attaches a controller when the view is set")]
+    [Example("Attaches a controller when the view that has the DataContextSource is set")]
     [Sample(Source = typeof(AttachingControllersSampleDataSource))]
-    void Ex01(object dataContext, Type[] expectedControllerTypes)
+    void Ex01(object dataContext, Control view, Type[] expectedControllerTypes)
     {
-        Given("a view that contains the data context", () => View = new TestControls.AttachingTestControl { DataContext = dataContext });
-        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = View);
+        Given("a view that contains the data context", () => view.DataContext = dataContext);
+        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = view);
         Then("the controller should be attached to the view", () =>
             WindowsFormsController.GetControllers().Select(controller => controller.GetType()).SequenceEqual(expectedControllerTypes) &&
             WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.DataContext == dataContext)
@@ -31,6 +31,30 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
     class AttachingControllersSampleDataSource : ISampleDataSource
     {
         IEnumerable ISampleDataSource.GetData()
+        {
+            foreach (var data in GetData())
+            {
+                yield return CreateData(data, "and the view has the DataContextSource", new TestControls.AttachingTestControl());
+            }
+            foreach (var data in GetData())
+            {
+                yield return CreateData(data, "and the view does not have the DataContextSource", new TestControls.AttachingTestControlWithoutDataContextSource());
+            }
+        }
+
+        private object CreateData(object data, string description, Control view)
+        {
+            var dataType = data.GetType();
+            return new
+            {
+                Description = $"{dataType.GetProperty("Description")?.GetValue(data)} and {description}",
+                DataContext = dataType.GetProperty("DataContext")?.GetValue(data),
+                View = view,
+                ExpectedControllerTypes = dataType.GetProperty("ExpectedControllerTypes")?.GetValue(data)
+            };
+        }
+
+        private IEnumerable GetData()
         {
             yield return new
             {
@@ -85,11 +109,10 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
 
     [Example("Attaches a controller when the view is set before the data context of the view is set")]
     [Sample(Source = typeof(AttachingControllersSampleDataSource))]
-    void Ex02(object dataContext, Type[] expectedControllerTypes)
+    void Ex02(object dataContext, Control view, Type[] expectedControllerTypes)
     {
-        Given("a view that contains the data context", () => View = new TestControls.AttachingTestControl());
-        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = View);
-        When("a data context of the view is set", () => View.DataContext = dataContext);
+        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = view);
+        When("a data context of the view is set", () => view.DataContext = dataContext);
         Then("the controller should be attached to the view", () =>
             WindowsFormsController.GetControllers().Select(controller => controller.GetType()).SequenceEqual(expectedControllerTypes) &&
             WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.DataContext == dataContext)
@@ -97,15 +120,35 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
     }
 
     [Example("Attaches a controller when the Type is specified")]
-    void Ex03()
+    [Sample(Source = typeof(AttachingControllersTypeSpecifiedSampleDataSource))]
+    void Ex03(Control view, IEnumerable<Type> expectedControllerTypes)
     {
         Given("a data context", () => DataContext = new object());
-        Given("a view that contains the data context", () => View = new TestControls.SingleControllerView { DataContext = DataContext });
-        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = View);
+        Given("a view that contains the data context", () => view.DataContext = DataContext);
+        When("the view is set to the WindowsFormsController", () => WindowsFormsController.View = view);
         Then("the controller should be attached to the view", () =>
-            WindowsFormsController.GetControllers().Select(controller => controller.GetType()).SequenceEqual(new[] { typeof(TestWindowsFormsControllers.TestWindowsFormsControllerForSingleControllerView) }) &&
+            WindowsFormsController.GetControllers().Select(controller => controller.GetType()).SequenceEqual(expectedControllerTypes) &&
             WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.DataContext == DataContext)
         );
+    }
+
+    class AttachingControllersTypeSpecifiedSampleDataSource : ISampleDataSource
+    {
+        IEnumerable ISampleDataSource.GetData()
+        {
+            yield return new
+            {
+                Description = "When the view has the DataContextSource",
+                View = new TestControls.SingleControllerView(),
+                ExpectedControllerTypes = new[] { typeof(TestWindowsFormsControllers.TestWindowsFormsControllerForSingleControllerView) }
+            };
+            yield return new
+            {
+                Description = "When the view does not have the DataContextSource",
+                View = new TestControls.SingleControllerViewWithoutDataContextSource(),
+                ExpectedControllerTypes = new[] { typeof(TestWindowsFormsControllers.TestWindowsFormsControllerForSingleControllerViewWithoutDataContextSource) }
+            };
+        }
     }
 
     [Example("Removes event handlers and sets null to controls and a data context when the Dispose event of the root control is raised")]
@@ -180,15 +223,20 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
     }
 
     [Example("Attaches multi controllers")]
-    void Ex06()
+    [Sample(Source = typeof(AttachingMultiControllersSampleDataSource))]
+    void Ex06(Control view)
     {
         var loadEventHandler = Substitute.For<Action>();
         var clickEventHandler = Substitute.For<Action>();
 
-        Given("a view that contains the data context", () => View = new TestControls.TestControl { Name = "Control", DataContext = new TestDataContexts.MultiTestDataContext() });
+        Given("a view that contains the data context", () =>
+        {
+            view.Name = "Control";
+            view.DataContext = new TestDataContexts.MultiTestDataContext();
+        });
         When("the view is set to the WindowsFormsController", () =>
         {
-            WindowsFormsController.View = View;
+            WindowsFormsController.View = view;
             WindowsFormsController.GetController<TestWindowsFormsControllers.MultiTestWindowsFormsControllerA>().LoadAssertionHandler = loadEventHandler;
             WindowsFormsController.GetController<TestWindowsFormsControllers.MultiTestWindowsFormsControllerA>().ClickAssertionHandler = clickEventHandler;
 
@@ -198,24 +246,41 @@ class WindowsFormsControllerSpec_AttachingAndDetachingController : FixtureSteppa
             WindowsFormsController.GetController<TestWindowsFormsControllers.MultiTestWindowsFormsControllerC>().LoadAssertionHandler = loadEventHandler;
             WindowsFormsController.GetController<TestWindowsFormsControllers.MultiTestWindowsFormsControllerC>().ClickAssertionHandler = clickEventHandler;
         });
-        Then("the data context of the controller should be set", () => WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.DataContext == View.DataContext));
+        Then("the data context of the controller should be set", () => WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.DataContext == view.DataContext));
 
-        When("the handle of the view is created", () => View.RaiseHandleCreated());
-        Then("the control of the controller should be set", () => WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.Control == View));
-        When("the Load event is raised", () => View.RaiseLoad());
+        When("the handle of the view is created", () => (view as TestControls.ITestControl)?.RaiseHandleCreated());
+        Then("the control of the controller should be set", () => WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.Control == view));
+        When("the Load event is raised", () => (view as TestControls.ITestControl)?.RaiseLoad());
         Then("the Load event should be handled", () => loadEventHandler.Received(3).Invoke());
-        When("the Click event is raised", () => View.RaiseClick());
+        When("the Click event is raised", () => (view as TestControls.ITestControl)?.RaiseClick());
         Then("the Click event should be handled", () => clickEventHandler.Received(3).Invoke());
 
         loadEventHandler.ClearReceivedCalls();
         clickEventHandler.ClearReceivedCalls();
-        When("the view is disposed", () => View.Dispose());
+        When("the view is disposed", view.Dispose);
         Then("the data context of the controller should be null", () => WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.DataContext == null));
         Then("the control of the controller should be null", () => WindowsFormsController.GetControllers().Cast<TestWindowsFormsControllers.TestWindowsFormsControllerBase>().All(controller => controller.Control == null));
-        When("the Load event is raised", () => View.RaiseLoad());
+        When("the Load event is raised", () => (view as TestControls.ITestControl)?.RaiseLoad());
         Then("the Load event should not be handled", () => loadEventHandler.DidNotReceive().Invoke());
-        When("the Click event is raised", () => View.RaiseClick());
+        When("the Click event is raised", () => (view as TestControls.ITestControl)?.RaiseClick());
         Then("the Click event should not be handled", () => clickEventHandler.DidNotReceive().Invoke());
+    }
+
+    class AttachingMultiControllersSampleDataSource : ISampleDataSource
+    {
+        IEnumerable ISampleDataSource.GetData()
+        {
+            yield return new
+            {
+                Description = "When the view has the DataContextSource",
+                View = new TestControls.TestControl()
+            };
+            yield return new
+            {
+                Description = "When the view does not have the DataContextSource",
+                View = new TestControls.TestControlWithoutDataContextSource()
+            };
+        }
     }
 
     [Example("Retrieves event handlers and executes them when a view is not attached")]

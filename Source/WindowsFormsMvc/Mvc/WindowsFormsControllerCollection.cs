@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -53,7 +53,7 @@ public sealed class WindowsFormsControllerCollection : ControllerCollection<Cont
         associatedControl.HandleCreated += OnControlHandleCreated;
         associatedControl.Disposed += OnControlDisposed;
 
-        associatedControl.AddDataContextChangedHandler(OnControlDataContextChanged, dataContextFinder);
+        associatedControl.AddDataContextChangedHandler(OnControlDataContextChanged, OnControlDataContextChanged, dataContextFinder);
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public sealed class WindowsFormsControllerCollection : ControllerCollection<Cont
         associatedControl.HandleCreated -= OnControlHandleCreated;
         associatedControl.Disposed -= OnControlDisposed;
 
-        associatedControl.RemoveDataContextChangedHandler(OnControlDataContextChanged, dataContextFinder);
+        associatedControl.RemoveDataContextChangedHandler(OnControlDataContextChanged, OnControlDataContextChanged, dataContextFinder);
     }
 
     private void OnControlHandleCreated(object? sender, EventArgs e)
@@ -74,6 +74,11 @@ public sealed class WindowsFormsControllerCollection : ControllerCollection<Cont
 
         SetElement(control);
         AttachExtensions();
+    }
+
+    private void OnControlDataContextChanged(object? sender, EventArgs e)
+    {
+        SetDataContext((sender as Control)?.DataContext);
     }
 
     private void OnControlDataContextChanged(object? sender, DataContextChangedEventArgs e)

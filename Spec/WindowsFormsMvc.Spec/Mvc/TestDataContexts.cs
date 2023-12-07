@@ -25,6 +25,7 @@ internal static class TestDataContexts
 
     public interface ITestContent;
     public class TestContent;
+    public class TestContentWithoutDataContextSource;
     public class BaseTestContent;
     public class DerivedTestContent : BaseTestContent;
     public class InterfaceImplementedTestContent : ITestContent;

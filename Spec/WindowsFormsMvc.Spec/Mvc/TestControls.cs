@@ -8,6 +8,15 @@ namespace Charites.Windows.Mvc;
 
 internal static class TestControls
 {
+    public interface ITestControl
+    {
+        TestComponent? GetTestComponent();
+        void RaiseHandleCreated();
+        void RaiseLoad();
+        void RaiseClick();
+        void RaiseTestComponentUpdated();
+    }
+
     public class TestComponent : Component
     {
         public event EventHandler? Updated;
@@ -15,12 +24,12 @@ internal static class TestControls
         public void RaiseUpdated() => Updated?.Invoke(this, EventArgs.Empty);
     }
 
-    public class TestControl : UserControl
+    public class TestControl : UserControl, ITestControl
     {
         public TestComponent? GetTestComponent() => testComponent;
         private readonly TestComponent? testComponent = new();
 
-        public object? DataContext
+        public override object? DataContext
         {
             get => DataContextSource.Value;
             set => DataContextSource.Value = value;
@@ -33,13 +42,28 @@ internal static class TestControls
         public void RaiseTestComponentUpdated() => testComponent?.RaiseUpdated();
     }
 
+    public class TestControlWithoutDataContextSource : UserControl, ITestControl
+    {
+        public TestComponent? GetTestComponent() => testComponent;
+        private readonly TestComponent? testComponent = new();
+
+        public void RaiseHandleCreated() => OnHandleCreated(EventArgs.Empty);
+        public void RaiseLoad() => OnLoad(EventArgs.Empty);
+        public void RaiseClick() => OnClick(EventArgs.Empty);
+        public void RaiseTestComponentUpdated() => testComponent?.RaiseUpdated();
+    }
+
     public class SingleControllerView : TestControl;
+    public class SingleControllerViewWithoutDataContextSource : TestControlWithoutDataContextSource;
     public class MultiControllerView : TestControl;
 
     public class AttachingTestControl : TestControl;
+    public class AttachingTestControlWithoutDataContextSource : TestControlWithoutDataContextSource;
 
     [ContentView(typeof(TestDataContexts.TestContent))]
     public class TestContentView : TestControl;
+    [ContentView(typeof(TestDataContexts.TestContentWithoutDataContextSource))]
+    public class TestContentViewWithoutDataContextSource : TestControlWithoutDataContextSource;
 
     [ContentView(typeof(TestDataContexts.BaseTestContent))]
     public class TestContentViewSpecifiedByBaseType : TestControl;

@@ -1,7 +1,8 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
+using System.Collections;
 using System.ComponentModel;
 using Carna;
 using NSubstitute;
@@ -23,7 +24,6 @@ class WindowsFormsControllerSpec_WindowsFormsControllerExtension : FixtureSteppa
 
     WindowsFormsController WindowsFormsController { get; } = new();
     TestDataContexts.TestDataContext DataContext { get; } = new();
-    TestControls.TestControl View { get; set; } = default!;
     TestWindowsFormsControllers.TestWindowsFormsController Controller { get; set; } = default!;
 
     public void Dispose()
@@ -32,20 +32,38 @@ class WindowsFormsControllerSpec_WindowsFormsControllerExtension : FixtureSteppa
     }
 
     [Example("Attaches an extension when the handle of the view is created and detaches it when the view is disposed")]
-    void Ex01()
+    [Sample(Source = typeof(WindowsFormsControllerExtensionSampleDataSource))]
+    void Ex01(Control view)
     {
-        Given("a view that contains a data context", () => View = new TestControls.TestControl { DataContext = DataContext });
+        Given("a view that contains a data context", () => view.DataContext = DataContext);
         When("the view is set to the WindowsFormsController", () =>
         {
-            WindowsFormsController.View = View;
+            WindowsFormsController.View = view;
             Controller = WindowsFormsController.GetController<TestWindowsFormsControllers.TestWindowsFormsController>();
         });
         When("the extension is added", () => WindowsFormsController.AddExtension(Extension));
-        When("the handle of the view is created", () => View.RaiseHandleCreated());
-        Then("the extension should be attached", () => Extension.Received(1).Attach(Controller, View));
+        When("the handle of the view is created", () => (view as TestControls.ITestControl)?.RaiseHandleCreated());
+        Then("the extension should be attached", () => Extension.Received(1).Attach(Controller, view));
 
-        When("the view is disposed", () => View.Dispose());
-        Then("the extension should be detached", () => Extension.Received(1).Detach(Controller, View));
+        When("the view is disposed", view.Dispose);
+        Then("the extension should be detached", () => Extension.Received(1).Detach(Controller, view));
+    }
+
+    class WindowsFormsControllerExtensionSampleDataSource : ISampleDataSource
+    {
+        IEnumerable ISampleDataSource.GetData()
+        {
+            yield return new
+            {
+                Description = "When the view has the DataContextSource",
+                View = new TestControls.TestControl()
+            };
+            yield return new
+            {
+                Description = "When the view does not have the DataContextSource",
+                View = new TestControls.TestControlWithoutDataContextSource()
+            };
+        }
     }
 
     [Example("Retrieves a container of an extension")]

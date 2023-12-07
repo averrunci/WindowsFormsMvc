@@ -57,6 +57,8 @@ internal static class TestWindowsFormsControllers
 
     [View(ViewType = typeof(TestControls.SingleControllerView))]
     public class TestWindowsFormsControllerForSingleControllerView : TestWindowsFormsControllerBase;
+    [View(ViewType = typeof(TestControls.SingleControllerViewWithoutDataContextSource))]
+    public class TestWindowsFormsControllerForSingleControllerViewWithoutDataContextSource : TestWindowsFormsControllerBase;
 
     [View(ViewType = typeof(TestControls.MultiControllerView))]
     public class MultiTestWindowsFormsControllerAForMultiControllerView : TestWindowsFormsControllerBase;

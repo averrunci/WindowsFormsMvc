@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -45,28 +45,36 @@ internal static class Extensions
             .FirstOrDefault(control => control is not null);
     }
 
-    public static void AddDataContextChangedHandler(this Control @this, DataContextChangedEventHandler handler, IWindowsFormsDataContextFinder dataContextFinder)
+    public static void AddDataContextChangedHandler(this Control @this, EventHandler handler, DataContextChangedEventHandler dataContextChangedHandler, IWindowsFormsDataContextFinder dataContextFinder)
     {
         var dataContextSource = dataContextFinder.FindSource(@this);
-        if (dataContextSource is null) return;
-
-        dataContextSource.DataContextChanged += handler;
+        if (dataContextSource is null)
+        {
+            @this.DataContextChanged += handler;
+        }
+        else
+        {
+            dataContextSource.DataContextChanged += dataContextChangedHandler;
+        }
     }
 
-    public static void RemoveDataContextChangedHandler(this Control @this, DataContextChangedEventHandler handler, IWindowsFormsDataContextFinder dataContextFinder)
+    public static void RemoveDataContextChangedHandler(this Control @this, EventHandler handler, DataContextChangedEventHandler dataContextChangedHandler, IWindowsFormsDataContextFinder dataContextFinder)
     {
         var dataContextSource = dataContextFinder.FindSource(@this);
-        if (dataContextSource is null) return;
-
-        dataContextSource.DataContextChanged -= handler;
+        if (dataContextSource is null)
+        {
+            @this.DataContextChanged -= handler;
+        }
+        else
+        {
+            dataContextSource.DataContextChanged -= dataContextChangedHandler;
+        }
     }
 
     public static void SetDataContext(this Control @this, object? dataContext, IWindowsFormsDataContextFinder dataContextFinder)
     {
-        var dataContextSource = dataContextFinder.FindSource(@this);
-        if (dataContextSource is null) return;
-
-        dataContextSource.Value = dataContext;
+        @this.DataContext = dataContext;
+        dataContextFinder.FindSource(@this).IfPresent(source => source.Value = dataContext);
     }
 
     public static WindowsFormsController? FindWindowsFormsController(this Component? @this)
