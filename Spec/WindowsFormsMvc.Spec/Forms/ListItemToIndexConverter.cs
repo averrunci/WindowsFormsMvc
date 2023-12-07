@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -11,6 +11,4 @@ namespace Charites.Windows.Forms;
     typeof(ListItemToIndexConverter_Convert),
     typeof(ListItemToIndexConverter_ConvertBack)
 )]
-class ListItemToIndexConverter
-{
-}
+class ListItemToIndexConverter;

@@ -33,16 +33,16 @@ internal static class TestWindowsFormsControllers
     }
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+TestDataContext")]
-    public class TestWindowsFormsController : TestWindowsFormsControllerBase { }
+    public class TestWindowsFormsController : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+MultiTestDataContext")]
-    public class MultiTestWindowsFormsControllerA : TestWindowsFormsControllerBase { }
+    public class MultiTestWindowsFormsControllerA : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+MultiTestDataContext")]
-    public class MultiTestWindowsFormsControllerB : TestWindowsFormsControllerBase { }
+    public class MultiTestWindowsFormsControllerB : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+MultiTestDataContext")]
-    public class MultiTestWindowsFormsControllerC : TestWindowsFormsControllerBase { }
+    public class MultiTestWindowsFormsControllerC : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+TestDisposableDataContext")]
     public class TestDisposableWindowsFormsController : TestWindowsFormsControllerBase, IDisposable
@@ -56,16 +56,16 @@ internal static class TestWindowsFormsControllers
     }
 
     [View(ViewType = typeof(TestControls.SingleControllerView))]
-    public class TestWindowsFormsControllerForSingleControllerView : TestWindowsFormsControllerBase { }
+    public class TestWindowsFormsControllerForSingleControllerView : TestWindowsFormsControllerBase;
 
     [View(ViewType = typeof(TestControls.MultiControllerView))]
-    public class MultiTestWindowsFormsControllerAForMultiControllerView : TestWindowsFormsControllerBase { }
+    public class MultiTestWindowsFormsControllerAForMultiControllerView : TestWindowsFormsControllerBase;
 
     [View(ViewType = typeof(TestControls.MultiControllerView))]
-    public class MultiTestWindowsFormsControllerBForMultiControllerView : TestWindowsFormsControllerBase { }
+    public class MultiTestWindowsFormsControllerBForMultiControllerView : TestWindowsFormsControllerBase;
 
     [View(ViewType = typeof(TestControls.MultiControllerView))]
-    public class MultiTestWindowsFormsControllerCForMultiControllerView : TestWindowsFormsControllerBase { }
+    public class MultiTestWindowsFormsControllerCForMultiControllerView : TestWindowsFormsControllerBase;
 
     public class TestWindowsFormsControllerAsync
     {
@@ -100,31 +100,31 @@ internal static class TestWindowsFormsControllers
     }
 
     [View(Key = "AttachingTestDataContext")]
-    public class TestDataContextController : TestWindowsFormsControllerBase { }
+    public class TestDataContextController : TestWindowsFormsControllerBase;
 
     [View(Key = "BaseAttachingTestDataContext")]
-    public class BaseTestDataContextController : TestWindowsFormsControllerBase { }
+    public class BaseTestDataContextController : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+AttachingTestDataContextFullName")]
-    public class TestDataContextFullNameController : TestWindowsFormsControllerBase { }
+    public class TestDataContextFullNameController : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+BaseAttachingTestDataContextFullName")]
-    public class BaseTestDataContextFullNameController : TestWindowsFormsControllerBase { }
+    public class BaseTestDataContextFullNameController : TestWindowsFormsControllerBase;
 
     [View(Key = "GenericAttachingTestDataContext`1")]
-    public class GenericTestDataContextController : TestWindowsFormsControllerBase { }
+    public class GenericTestDataContextController : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+GenericAttachingTestDataContextFullName`1[System.String]")]
-    public class GenericTestDataContextFullNameController : TestWindowsFormsControllerBase { }
+    public class GenericTestDataContextFullNameController : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+GenericAttachingTestDataContextFullName`1")]
-    public class GenericTestDataContextFullNameWithoutParametersController : TestWindowsFormsControllerBase { }
+    public class GenericTestDataContextFullNameWithoutParametersController : TestWindowsFormsControllerBase;
 
     [View(Key = "IAttachingTestDataContext")]
-    public class InterfaceImplementedTestDataContextController : TestWindowsFormsControllerBase { }
+    public class InterfaceImplementedTestDataContextController : TestWindowsFormsControllerBase;
 
     [View(Key = "Charites.Windows.Mvc.TestDataContexts+IAttachingTestDataContextFullName")]
-    public class InterfaceImplementedTestDataContextFullNameController : TestWindowsFormsControllerBase { }
+    public class InterfaceImplementedTestDataContextFullNameController : TestWindowsFormsControllerBase;
 
     public class AttributedToField
     {
