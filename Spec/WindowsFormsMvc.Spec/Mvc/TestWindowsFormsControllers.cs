@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2022 Fievus
+﻿// Copyright (C) 2022-2023 Fievus
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -148,49 +148,31 @@ internal static class TestWindowsFormsControllers
             public TestControls.TestComponent? TestComponent => testComponent;
         }
 
-        public class NoArgumentHandlerController : Controller
+        public class NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            private Action handler;
+            private Action handler = assertionHandler;
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            private Action componentEventHandler;
-
-            public NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            private Action componentEventHandler = componentEventAssertionHandler;
         }
 
-        public class OneArgumentHandlerController : Controller
+        public class OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            private Action<EventArgs> handler;
+            private Action<EventArgs> handler = assertionHandler;
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            private Action<EventArgs> componentEventHandler;
-
-            public OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            private Action<EventArgs> componentEventHandler = componentEventAssertionHandler;
         }
 
-        public class EventHandlerController : Controller
+        public class EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            private EventHandler handler;
+            private EventHandler handler = assertionHandler;
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            private EventHandler componentEventHandler;
-
-            public EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            private EventHandler componentEventHandler = componentEventAssertionHandler;
         }
     }
 
@@ -211,49 +193,31 @@ internal static class TestWindowsFormsControllers
             public TestControls.TestComponent? TestComponent { get; protected set; }
         }
 
-        public class NoArgumentHandlerController : Controller
+        public class NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            private Action Handler { get; set; }
+            private Action Handler { get; set; } = assertionHandler;
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            private Action ComponentEventHandler { get; set; }
-
-            public NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler)
-            {
-                Handler = assertionHandler;
-                ComponentEventHandler = componentEventAssertionHandler;
-            }
+            private Action ComponentEventHandler { get; set; } = componentEventAssertionHandler;
         }
 
-        public class OneArgumentHandlerController : Controller
+        public class OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            private Action<EventArgs> Handler { get; set; }
+            private Action<EventArgs> Handler { get; set; } = assertionHandler;
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            private Action<EventArgs> ComponentEventHandler { get; set; }
-
-            public OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler)
-            {
-                Handler = assertionHandler;
-                ComponentEventHandler = componentEventAssertionHandler;
-            }
+            private Action<EventArgs> ComponentEventHandler { get; set; } = componentEventAssertionHandler;
         }
 
-        public class EventHandlerController : Controller
+        public class EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            private EventHandler Handler { get; set; }
+            private EventHandler Handler { get; set; } = assertionHandler;
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            private EventHandler ComponentEventHandler { get; set; }
-
-            public EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler)
-            {
-                Handler = assertionHandler;
-                ComponentEventHandler = componentEventAssertionHandler;
-            }
+            private EventHandler ComponentEventHandler { get; set; } = componentEventAssertionHandler;
         }
     }
 
@@ -278,55 +242,31 @@ internal static class TestWindowsFormsControllers
             public TestControls.TestComponent? TestComponent { get; private set; }
         }
 
-        public class NoArgumentHandlerController : Controller
+        public class NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            public void ChildControl_Click() => handler();
-            private readonly Action handler;
+            public void ChildControl_Click() => assertionHandler();
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            public void TestComponent_Updated() => componentEventHandler();
-            private readonly Action componentEventHandler;
-
-            public NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            public void TestComponent_Updated() => componentEventAssertionHandler();
         }
 
-        public class OneArgumentHandlerController : Controller
+        public class OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            public void ChildControl_Click(EventArgs e) => handler(e);
-            private readonly Action<EventArgs> handler;
+            public void ChildControl_Click(EventArgs e) => assertionHandler(e);
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            public void TestComponent_Updated(EventArgs e) => componentEventHandler(e);
-            private readonly Action<EventArgs> componentEventHandler;
-
-            public OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            public void TestComponent_Updated(EventArgs e) => componentEventAssertionHandler(e);
         }
 
-        public class EventHandlerController : Controller
+        public class EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler) : Controller
         {
             [EventHandler(ElementName = "childControl", Event = nameof(System.Windows.Forms.Control.Click))]
-            public void ChildControl_Click(object? sender, EventArgs e) => handler(sender, e);
-            private readonly EventHandler handler;
+            public void ChildControl_Click(object? sender, EventArgs e) => assertionHandler(sender, e);
 
             [EventHandler(ElementName = "testComponent", Event = nameof(TestControls.TestComponent.Updated))]
-            public void TestComponent_Updated(object? sender, EventArgs e) => componentEventHandler(sender, e);
-            private readonly EventHandler componentEventHandler;
-
-            public EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            public void TestComponent_Updated(object? sender, EventArgs e) => componentEventAssertionHandler(sender, e);
         }
     }
 
@@ -350,49 +290,25 @@ internal static class TestWindowsFormsControllers
             public TestControls.TestComponent? TestComponent { get; private set; }
         }
 
-        public class NoArgumentHandlerController : Controller
+        public class NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler) : Controller
         {
-            public void childControl_Click() => handler();
-            private readonly Action handler;
+            public void childControl_Click() => assertionHandler();
 
-            public void testComponent_Updated() => componentEventHandler();
-            private readonly Action componentEventHandler;
-
-            public NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            public void testComponent_Updated() => componentEventAssertionHandler();
         }
 
-        public class OneArgumentHandlerController : Controller
+        public class OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler) : Controller
         {
-            public void childControl_Click(EventArgs e) => handler(e);
-            private readonly Action<EventArgs> handler;
+            public void childControl_Click(EventArgs e) => assertionHandler(e);
 
-            public void testComponent_Updated(EventArgs e) => componentEventHandler(e);
-            private readonly Action<EventArgs> componentEventHandler;
-
-            public OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            public void testComponent_Updated(EventArgs e) => componentEventAssertionHandler(e);
         }
 
-        public class EventHandlerController : Controller
+        public class EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler) : Controller
         {
-            public void childControl_Click(object? sender, EventArgs e) => handler(sender, e);
-            private readonly EventHandler handler;
+            public void childControl_Click(object? sender, EventArgs e) => assertionHandler(sender, e);
 
-            public void testComponent_Updated(object? sender, EventArgs e) => componentEventHandler(sender, e);
-            private readonly EventHandler componentEventHandler;
-
-            public EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
-            }
+            public void testComponent_Updated(object? sender, EventArgs e) => componentEventAssertionHandler(sender, e);
         }
     }
 
@@ -416,72 +332,48 @@ internal static class TestWindowsFormsControllers
             public TestControls.TestComponent? TestComponent { get; private set; }
         }
 
-        public class NoArgumentHandlerController : Controller
+        public class NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler) : Controller
         {
             public Task childControl_ClickAsync()
             {
-                handler();
+                assertionHandler();
                 return Task.CompletedTask;
             }
-            private readonly Action handler;
 
             public Task testComponent_UpdatedAsync()
             {
-                componentEventHandler();
+                componentEventAssertionHandler();
                 return Task.CompletedTask;
-            }
-            private readonly Action componentEventHandler;
-
-            public NoArgumentHandlerController(Action assertionHandler, Action componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
             }
         }
 
-        public class OneArgumentHandlerController : Controller
+        public class OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler) : Controller
         {
             public Task childControl_ClickAsync(EventArgs e)
             {
-                handler(e);
+                assertionHandler(e);
                 return Task.CompletedTask;
             }
-            private readonly Action<EventArgs> handler;
 
             public Task testComponent_UpdatedAsync(EventArgs e)
             {
-                componentEventHandler(e);
+                componentEventAssertionHandler(e);
                 return Task.CompletedTask;
-            }
-            private readonly Action<EventArgs> componentEventHandler;
-
-            public OneArgumentHandlerController(Action<EventArgs> assertionHandler, Action<EventArgs> componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
             }
         }
 
-        public class EventHandlerController : Controller
+        public class EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler) : Controller
         {
             public Task childControl_ClickAsync(object? sender, EventArgs e)
             {
-                handler(sender, e);
+                assertionHandler(sender, e);
                 return Task.CompletedTask;
             }
-            private readonly EventHandler handler;
 
             public Task testComponent_UpdatedAsync(object? sender, EventArgs e)
             {
-                componentEventHandler(sender, e);
+                componentEventAssertionHandler(sender, e);
                 return Task.CompletedTask;
-            }
-            private readonly EventHandler componentEventHandler;
-
-            public EventHandlerController(EventHandler assertionHandler, EventHandler componentEventAssertionHandler)
-            {
-                handler = assertionHandler;
-                componentEventHandler = componentEventAssertionHandler;
             }
         }
     }
