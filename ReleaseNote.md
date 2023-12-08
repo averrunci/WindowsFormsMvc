@@ -1,5 +1,18 @@
 # Release note
 
+## v4.0.0
+
+### Changes
+
+- Change the target framework version to .NET 8.0.
+- Change Charites version to 3.0.0.
+- Change Charites.Bindings version to 3.0.0.
+- Change to bind after unbinding without throwing an exception when ItemsSource has already bound another items.
+- Change to return without throwing an exception when ItemsSource has not bound any items yet.
+- Change to bind after unbinding when BoundPropertyBinding has already bound another.
+- Change to bind after unbinding when ObservablePropertyBinding has already bound another.
+- Change to be able to user the DataContext property and the DataContextChanged event of the Control.
+
 ## v3.3.0
 
 ## Changes

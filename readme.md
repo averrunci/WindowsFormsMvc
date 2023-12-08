@@ -42,6 +42,8 @@ The ContentViewAttribute is provided to specify the model associated with the vi
 The DataContextSource is provided to set the instance of the model associated with the view.
 When the DataContextChanged event of the DataContextSource occurs, the value of the model should be bound to the property of the view.
 
+Instead of using the DataContextSource, the DataContext property and the DataContextChanged event of the Control can be used.
+
 The WindowsFormsController is provided to associate controllers that handle events on the view with the view.
 The view should be set to the View property of the WindowsFormsController.
 
@@ -52,7 +54,6 @@ The typical implementation of the view is as follows;
 public class LoginView : UserControl
 {
     private IContainer components;
-    private DataContextSource dataContextSource;
     private WindowsFormsController windowsFormsController;
 
     private TextBox userIdTextBox;
@@ -71,10 +72,7 @@ public class LoginView : UserControl
     {
         components = new Container();
 
-        dataContextSource = new DataContextSource(components);
-        dataContextSource.DataContextChanged += dataContextSource_DataContextChanged;
-
-        windowsFormsController = new WindowsFormsController();
+        windowsFormsController = new WindowsFormsController(components);
         windowsFormsController.View = this;
 
         userIdTextBox = new TextBox();
@@ -82,6 +80,8 @@ public class LoginView : UserControl
 
         SuspendLayout();
         Controls.Add(userIdTextBox);
+
+        DataContextChanged += LoginView_DataContextChanged;
         ...
         ResumeLayout(false);
     }
@@ -96,26 +96,26 @@ public class LoginView : UserControl
     private void BindContent(LoginContent loginContent)
     {
         // The value of the model is bound to the property of the Control.
-        observablePropertyBindings.BindTwoWay(loginContent.UserId.Value, userIdTextBox, nameof(userIdTextBox.Text));
+        observablePropertyBindings.BindTwoWay(loginContent.UserId, userIdTextBox, nameof(userIdTextBox.Text));
         ...
     }
 
-    private void UnbindContent(LoginContent loginContent)
+    private void UnbindContent()
     {
         // The value of the model is unbound from the property of the Control.
         observablePropertyBindings.Unbind();
     }
 
-    private void dataContextSource_DataContextChanged(object? sender, DataContextChangedEventArgs e)
+    private void LoginView_DataContextChanged(object? sender, EventArgs e)
     {
-        if (e.OldValue is LoginContent oldContent) UnbindContent(oldContent);
-        if (e.NewValue is LoginContent newContent) BindContent(newContent);
+        UnbindContent();
+        (DataContext as LoginContent).IfPresent(BindContent);
     }
 }
 ```
 
 The ContentControl is provided to show the view with which the model is associated.
-The ContentControl searches the view attributed by the ContetViewAttribute by the model that is set to the Content property and the instance of the model is set to the DataContextSource of the view.
+The ContentControl searches the view attributed by the ContetViewAttribute by the model that is set to the Content property and the instance of the model is set to the DataContext and the DataContextSource of the view.
 
 ### Controller
 
