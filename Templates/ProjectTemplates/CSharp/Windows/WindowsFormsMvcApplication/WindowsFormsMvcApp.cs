@@ -2,15 +2,8 @@
 
 namespace $safeprojectname$;
 
-internal class $safeprojectname$ : IHostedService
+internal class $safeprojectname$(I$safeprojectname$Application application) : IHostedService
 {
-    private readonly I$safeprojectname$Application application;
-
-    public $safeprojectname$(I$safeprojectname$Application application)
-    {
-        this.application = application;
-    }
-
     public Task StartAsync(CancellationToken cancellationToken)
     {
         application.Run();

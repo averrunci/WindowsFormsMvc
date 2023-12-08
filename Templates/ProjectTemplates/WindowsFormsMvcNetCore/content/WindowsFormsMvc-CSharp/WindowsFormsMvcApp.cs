@@ -2,15 +2,8 @@
 
 namespace WindowsFormsMvcApp;
 
-internal class WindowsFormsMvcApp : IHostedService
+internal class WindowsFormsMvcApp(IWindowsFormsMvcAppApplication application) : IHostedService
 {
-    private readonly IWindowsFormsMvcAppApplication application;
-
-    public WindowsFormsMvcApp(IWindowsFormsMvcAppApplication application)
-    {
-        this.application = application;
-    }
-
     public Task StartAsync(CancellationToken cancellationToken)
     {
         application.Run();

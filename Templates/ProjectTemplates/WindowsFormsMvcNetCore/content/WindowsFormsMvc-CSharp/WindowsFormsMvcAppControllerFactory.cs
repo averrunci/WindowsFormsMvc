@@ -3,14 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WindowsFormsMvcApp;
 
-public class WindowsFormsMvcAppControllerFactory : IWindowsFormsControllerFactory
+public class WindowsFormsMvcAppControllerFactory(IServiceProvider services) : IWindowsFormsControllerFactory
 {
-    private readonly IServiceProvider services;
-
-    public WindowsFormsMvcAppControllerFactory(IServiceProvider services)
-    {
-        this.services = services;
-    }
-
     public object Create(Type controllerType) => services.GetRequiredService(controllerType);
 }
