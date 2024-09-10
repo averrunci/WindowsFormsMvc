@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>WindowsFormsMvc.ProjectTemplates</id>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
     <title>Windows Forms Mvc Application</title>
     <authors>averrunci</authors>
     <owners>averrunci</owners>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Windows Forms Mvc application Project Template.</description>
     <language>en-US</language>
-    <copyright>Copyright (C) 2022-2023 Fievus</copyright>
+    <copyright>Copyright (C) 2022-2024 Fievus</copyright>
     <tags>winforms mvc charites</tags>
     <packageTypes>
       <packageType name="Template"/>
