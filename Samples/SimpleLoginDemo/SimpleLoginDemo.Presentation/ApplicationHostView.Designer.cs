@@ -32,8 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicationHostView));
             titleLabel = new Label();
             footerLabel = new Label();
-            contentControl = new Forms.ContentControl();
-            windowsFormsController = new Mvc.WindowsFormsController(components);
+            contentControl = new Charites.Windows.Forms.ContentControl();
+            windowsFormsController = new Charites.Windows.Mvc.WindowsFormsController(components);
             SuspendLayout();
             // 
             // titleLabel
