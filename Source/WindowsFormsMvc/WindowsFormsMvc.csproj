@@ -10,12 +10,12 @@
     <Authors>averrunci</Authors>
     <PackageProjectUrl>https://github.com/averrunci/WindowsFormsMvc</PackageProjectUrl>
     <PackageTags>winforms mvc charites</PackageTags>
-    <Copyright>Copyright (C) 2022-2024 Fievus</Copyright>
-    <Version>4.1.0</Version>
+    <Copyright>Copyright (C) 2022-2025 Fievus</Copyright>
+    <Version>4.2.0</Version>
     <Description>The class library for Windows Forms with Model View Controller.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>4.1.0</AssemblyVersion>
-    <FileVersion>4.1.0</FileVersion>
+    <AssemblyVersion>4.2.0</AssemblyVersion>
+    <FileVersion>4.2.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

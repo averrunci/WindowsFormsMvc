@@ -1,5 +1,11 @@
 # Release note
 
+## v4.2.0
+
+### Change
+
+- Change Charites version to 3.2.0.
+
 ## v4.1.0
 
 ### Changes
